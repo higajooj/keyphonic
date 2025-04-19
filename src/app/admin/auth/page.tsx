@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -14,7 +14,7 @@ const loginFormSchema = z.object({
 type loginFormType = z.infer<typeof loginFormSchema>;
 
 export default function Page() {
-  const { push } = useRouter();
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
@@ -22,9 +22,8 @@ export default function Page() {
   } = useForm<loginFormType>({
     resolver: zodResolver(loginFormSchema),
   });
-  const onSubmit = (data: loginFormType) => {
-    console.log(data);
-    push("/admin");
+  const onSubmit = async (data: loginFormType) => {
+    await login(data);
   };
 
   return (
