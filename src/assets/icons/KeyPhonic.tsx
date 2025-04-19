@@ -18,8 +18,8 @@ export const KeyPhonicIcon = (props: KeyPhonicIconProps) => {
         x2="37.25"
         y2="15.25"
         stroke="#008ECC"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <line
         x1="12.75"
@@ -27,8 +27,8 @@ export const KeyPhonicIcon = (props: KeyPhonicIconProps) => {
         x2="30.1591"
         y2="24.25"
         stroke="#008ECC"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <line
         x1="12.75"
@@ -36,8 +36,8 @@ export const KeyPhonicIcon = (props: KeyPhonicIconProps) => {
         x2="24.25"
         y2="33.25"
         stroke="#008ECC"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );
