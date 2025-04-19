@@ -27,6 +27,7 @@ const RootLayout = ({
 	return (
 		<html lang="en">
 			<body
+			cz-shortcut-listen="true"
 			// TODO fix fonts
 			// className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
