@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <AuthProvider>
       <section className="min-h-screen flex flex-col">
         <Header />
-        {children}
+        <main className="grow flex flex-col py-8 px-14">{children}</main>
       </section>
     </AuthProvider>
   );

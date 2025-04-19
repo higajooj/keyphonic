@@ -24,7 +24,7 @@ export const Header = ({}: HeaderProps) => {
       {
         icon: <ArrowUpDown />,
         label: "Pedidos",
-        href: "/admin",
+        href: "/admin/orders",
       },
       {
         icon: <Package />,
@@ -35,7 +35,7 @@ export const Header = ({}: HeaderProps) => {
   }, []);
 
   return (
-    <div className="flex items-center gap-16 px-16 py-5">
+    <div className="flex items-center gap-16 px-16 py-5 border-b">
       <Link href="/admin" className="flex gap-3 items-center">
         <KeyPhonicIcon />
         <h1 className="text-2xl text-brand-500 font-bold">KeyPhonic</h1>

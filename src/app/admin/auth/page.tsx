@@ -27,7 +27,7 @@ export default function Page() {
   };
 
   return (
-    <div className="grow flex items-center justify-center">
+    <div className="flex items-center justify-center grow">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-[#F7F7F7] p-8 flex flex-col rounded-xl w-full m-8 max-w-[495px]"
