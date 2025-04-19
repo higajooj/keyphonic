@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (input: LoginInput) => {
     console.log(input);
     setIsAuthenticated(true);
-    push("/admin");
+    push("/admin/orders");
   };
 
   const logout = () => {
