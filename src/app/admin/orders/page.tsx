@@ -1,9 +1,11 @@
+import { DataTable } from "@/components/admin/data-table";
 import { OrdersChart } from "@/components/admin/OrdersChart";
 import { Button } from "@/components/ui/button";
 import { ChartConfig } from "@/components/ui/chart";
 import { Input } from "@/components/ui/input";
 import { formatMoney } from "@/lib/utils";
 import { Calendar, Filter } from "lucide-react";
+import { columns, Order } from "./columns";
 
 export default function Page() {
   const chartData = [
@@ -43,6 +45,57 @@ export default function Page() {
       label: "Cancelados",
       value: 36457.89,
       count: 43,
+    },
+  ];
+
+  const data: Order[] = [
+    {
+      id: "728ed52f",
+      client: "Sarah Fernandez",
+      total: 170,
+      qty: 3,
+      status: "pending",
+      date: new Date("2025-02-14").toISOString(),
+    },
+    {
+      id: "728ed52f",
+      client: "Camila Rodriguez",
+      total: 1150,
+      qty: 6,
+      status: "completed",
+      date: new Date("2025-02-13").toISOString(),
+    },
+    {
+      id: "728ed52f",
+      client: "Igor Nascimento",
+      total: 980,
+      qty: 1,
+      status: "refused",
+      date: new Date("2025-02-12").toISOString(),
+    },
+    {
+      id: "728ed52f",
+      client: "Sarah Fernandez",
+      total: 170,
+      qty: 3,
+      status: "pending",
+      date: new Date("2025-02-14").toISOString(),
+    },
+    {
+      id: "728ed52f",
+      client: "Camila Rodriguez",
+      total: 1150,
+      qty: 6,
+      status: "completed",
+      date: new Date("2025-02-13").toISOString(),
+    },
+    {
+      id: "728ed52f",
+      client: "Igor Nascimento",
+      total: 980,
+      qty: 1,
+      status: "refused",
+      date: new Date("2025-02-12").toISOString(),
     },
   ];
 
@@ -92,7 +145,7 @@ export default function Page() {
       </div>
       <div className="grow flex flex-col gap-4">
         <Input name="search" placeholder="Pesquisar" variant="search" />
-      
+        <DataTable columns={columns} data={data} />
       </div>
     </div>
   );
