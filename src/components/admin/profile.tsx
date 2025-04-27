@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface ProfileProps {
@@ -14,8 +15,8 @@ export const Profile = ({ name, role, imageUrl }: ProfileProps) => {
 
   return (
     <Link
+      className="flex items-center gap-2.5 rounded-xl border p-2.5"
       href="/admin/profile"
-      className="flex items-center gap-2.5 p-2.5 border rounded-xl"
     >
       <Avatar>
         <AvatarImage src={imageUrl} />

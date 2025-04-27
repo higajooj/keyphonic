@@ -32,22 +32,22 @@ interface OrdersChartProps {
 
 export function OrdersChart({ chartConfig, chartData }: OrdersChartProps) {
   return (
-    <ChartContainer config={chartConfig} className="w-full aspect-[864/310]">
-      <BarChart accessibilityLayer data={chartData} barSize={30}>
-        <CartesianGrid vertical={false} stroke="#E5E5E5" strokeDasharray="12" />
+    <ChartContainer className="aspect-[864/310] w-full" config={chartConfig}>
+      <BarChart accessibilityLayer barSize={30} data={chartData}>
+        <CartesianGrid stroke="#E5E5E5" strokeDasharray="12" vertical={false} />
         <YAxis tickFormatter={(value) => formatYAxisLabel(value)} />
         <XAxis
+          axisLine={false}
           dataKey="month"
+          tickFormatter={(value) => value.slice(0, 3)}
           tickLine={false}
           tickMargin={10}
-          axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <Bar
+          activeBar={{ fill: "var(--color-value)" }}
           dataKey="value"
           fill={"#E5E5E5"}
-          activeBar={{ fill: "var(--color-value)" }}
           radius={8}
         />
       </BarChart>

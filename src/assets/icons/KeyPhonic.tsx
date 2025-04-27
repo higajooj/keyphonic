@@ -4,40 +4,40 @@ interface KeyPhonicIconProps extends SVGProps<SVGSVGElement> {}
 export const KeyPhonicIcon = (props: KeyPhonicIconProps) => {
   return (
     <svg
-      width="48"
+      fill="none"
       height="48"
       viewBox="0 0 48 48"
-      fill="none"
+      width="48"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <rect width="48" height="48" rx="10" fill="#F3F9FB" />
+      <rect fill="#F3F9FB" height="48" rx="10" width="48" />
       <line
+        stroke="#008ECC"
+        strokeLinecap="round"
+        strokeWidth="1.5"
         x1="12.75"
-        y1="15.25"
         x2="37.25"
+        y1="15.25"
         y2="15.25"
-        stroke="#008ECC"
-        strokeWidth="1.5"
-        strokeLinecap="round"
       />
       <line
+        stroke="#008ECC"
+        strokeLinecap="round"
+        strokeWidth="1.5"
         x1="12.75"
-        y1="24.25"
         x2="30.1591"
+        y1="24.25"
         y2="24.25"
-        stroke="#008ECC"
-        strokeWidth="1.5"
-        strokeLinecap="round"
       />
       <line
-        x1="12.75"
-        y1="33.25"
-        x2="24.25"
-        y2="33.25"
         stroke="#008ECC"
-        strokeWidth="1.5"
         strokeLinecap="round"
+        strokeWidth="1.5"
+        x1="12.75"
+        x2="24.25"
+        y1="33.25"
+        y2="33.25"
       />
     </svg>
   );
