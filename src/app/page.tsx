@@ -1,5 +1,6 @@
 import { CircleUser, MapPin } from "lucide-react";
 import Link from "next/link";
+import HighlightsCarousel from "@/components/home/highlights-carousel";
 import ProductCategories from "@/components/home/product-categories";
 import { Input } from "@/components/ui/input";
 
@@ -30,6 +31,14 @@ const Home = () => {
 
       <div className="flex justify-center border-b py-6">
         <ProductCategories />
+      </div>
+
+      <div className="flex justify-center py-6">
+        <HighlightsCarousel />
+      </div>
+
+      <div className="flex bg-slate-50 py-6">
+        <span>asd</span>
       </div>
     </div>
   );
