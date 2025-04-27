@@ -1,18 +1,10 @@
-import { KeyPhonicIcon } from "@/assets/icons/KeyPhonic";
-import { useAuth } from "@/hooks/useAuth";
-import { cn } from "@/lib/utils";
-import {
-  ArrowUpDown,
-  BoxSelect,
-  Package,
-  SortAsc,
-  User,
-  UserCircle,
-} from "lucide-react";
+import { ArrowUpDown, Package } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
+
+import { KeyPhonicIcon } from "@/assets/icons/KeyPhonic";
+import { useAuth } from "@/hooks/useAuth";
 import { MenuItem } from "./MenuItem";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Profile } from "./profile";
 
 interface HeaderProps {}
@@ -35,19 +27,19 @@ export const Header = ({}: HeaderProps) => {
   }, []);
 
   return (
-    <div className="flex items-center gap-16 px-16 py-5 border-b">
-      <Link href="/admin" className="flex gap-3 items-center">
+    <div className="flex items-center gap-16 border-b px-16 py-5">
+      <Link className="flex items-center gap-3" href="/admin">
         <KeyPhonicIcon />
-        <h1 className="text-2xl text-brand-500 font-bold">KeyPhonic</h1>
+        <h1 className="font-bold text-2xl text-brand-500">KeyPhonic</h1>
       </Link>
       {isAuthenticated && (
-        <div className="flex justify-between items-center w-full">
+        <div className="flex w-full items-center justify-between">
           <div className="flex gap-8">
             {menus.map((item) => (
               <MenuItem key={item.label} {...item} />
             ))}
           </div>
-          <Profile name="Felipe R a Soares" role="Administrador"  />
+          <Profile name="Felipe R a Soares" role="Administrador" />
         </div>
       )}
     </div>
