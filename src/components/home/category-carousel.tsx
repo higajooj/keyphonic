@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import productImage from "@/assets/images/home/product-image.jpg";
 import {
@@ -12,7 +13,10 @@ const CaterogyCarousel = () => {
     <Carousel className="w-full">
       <CarouselContent>
         <CarouselItem className="basis-1/3">
-          <div className="flex flex-col items-center font-semibold text-sm">
+          <Link
+            className="flex flex-col items-center font-semibold text-sm"
+            href="/products/123"
+          >
             <Image
               alt="Keyboard image"
               className="w-96 rounded-lg border-2 border-black"
@@ -20,7 +24,7 @@ const CaterogyCarousel = () => {
             />
             <span>Keychron Q3</span>
             <span className="font-bold">$ 160.00</span>
-          </div>
+          </Link>
         </CarouselItem>
 
         <CarouselItem className="basis-1/3">
