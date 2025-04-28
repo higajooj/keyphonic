@@ -39,7 +39,7 @@ export const Header = ({}: HeaderProps) => {
               <MenuItem key={item.label} {...item} />
             ))}
           </div>
-          <Profile name="Felipe R a Soares" role="Administrador" />
+          <Profile name="Felipe Soares" role="Administrador" />
         </div>
       )}
     </div>
