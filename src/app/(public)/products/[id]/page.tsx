@@ -1,9 +1,13 @@
-import React from "react";
+import ProductImagesCarousel from "@/components/products/product-images-carousel";
 
 const ProductPage = () => {
   return (
-    <div>
-      <span>test</span>
+    <div className="flex justify-center gap-x-8">
+      <ProductImagesCarousel />
+
+      <div className="flex border-2">
+        <span>really long text...</span>
+      </div>
     </div>
   );
 };
