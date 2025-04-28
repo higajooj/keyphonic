@@ -24,14 +24,14 @@ const HighlightsCarousel = () => {
             </div>
 
             <div className="flex">
-              <span>asd</span>
+              <span>image...</span>
             </div>
           </div>
         </CarouselItem>
 
         <CarouselItem>
-          <div className="flex justify-center rounded-md bg-black text-white">
-            <span>aaasd123</span>
+          <div className="flex h-full items-center justify-center rounded-md bg-black px-24 py-4 text-slate-100">
+            <span className="font-extrabold">Another card...</span>
           </div>
         </CarouselItem>
       </CarouselContent>
