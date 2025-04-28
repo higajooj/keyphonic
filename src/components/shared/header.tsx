@@ -16,7 +16,9 @@ const Header = () => {
 
       <Container>
         <div className="flex items-baseline justify-between border-gray-200 border-b py-6">
-          <h1 className="font-bold text-2xl">KeyPhonic</h1>
+          <Link href="/">
+            <h1 className="font-bold text-2xl">KeyPhonic</h1>
+          </Link>
 
           <div>
             <Input name="search" variant="search" />
