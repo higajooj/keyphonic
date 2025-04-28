@@ -127,7 +127,7 @@ export default function Page() {
           <OrdersChart chartConfig={chartConfig} chartData={chartData} />
         </div>
 
-        <div className="flex min-w-[412px] flex-col justify-start rounded-xl border p-8 pb-0">
+        <div className="flex sm:min-w-[412px] flex-col justify-start rounded-xl border p-8 pb-0">
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold">Resultado</p>
             <Button
@@ -142,12 +142,12 @@ export default function Page() {
 
           <div className="flex grow flex-col justify-between gap-2 py-4 xl:justify-evenly xl:py-0">
             {statisticData.map(({ count, label, value }) => (
-              <div key={label} className="flex items-end justify-between">
+              <div key={label} className="flex flex-col sm:flex-row sm:items-end justify-between">
                 <span>
                   <p className="text-xs font-medium">{label}:</p>
-                  <p className="text-4xl font-bold">{formatMoney(value)}</p>
+                  <p className="text-2xl sm:text-4xl font-bold">{formatMoney(value)}</p>
                 </span>
-                <p className="font-medium text-gray-500">{count} pedidos</p>
+                <p className="text-sm sm:text-md font-medium text-gray-500">{count} pedidos</p>
               </div>
             ))}
           </div>
