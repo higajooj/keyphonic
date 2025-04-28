@@ -16,7 +16,7 @@ export const Profile = ({ name, role, imageUrl }: ProfileProps) => {
   return (
     <Link
       className="flex items-center gap-2.5 rounded-xl border p-2.5"
-      href="/admin/profile"
+      href="/admin"
     >
       <Avatar>
         <AvatarImage src={imageUrl} />

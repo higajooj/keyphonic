@@ -1,44 +1,44 @@
 "use client";
 
+import { Pill } from "@/components/admin/Pill";
 import Status, { StatusEnum } from "@/components/admin/Status";
 import { formatMoney } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 
-export type Order = {
+export type Product = {
   id: string;
-  client: string;
-  status: "pending" | "completed" | "refused";
-  total: number;
+  name: string;
+  price: number;
   qty: number;
-  date: string;
+  status: "critic" | "full" | "empty";
+  category: "Keyboard" | "Headphone";
 };
 
-export const columns: ColumnDef<Order>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "id",
-    header: () => <div className="text-center">#Pedido</div>,
+    header: () => <div className="text-center">#</div>,
+    cell: (props) => (
+      <div className="text-center">#{props.getValue<string>()}</div>
+    ),
+  },
+  {
+    accessorKey: "name",
+    header: () => <div className="text-center">Produto</div>,
     cell: (props) => (
       <div className="text-center">{props.getValue<string>()}</div>
     ),
   },
   {
-    accessorKey: "client",
-    header: () => <div className="text-center">Cliente</div>,
-    cell: (props) => (
-      <div className="text-center">{props.getValue<string>()}</div>
-    ),
-  },
-  {
-    accessorKey: "total",
-    header: () => <div className="text-center">Total</div>,
+    accessorKey: "price",
+    header: () => <div className="text-center">Valor</div>,
     cell: (props) => (
       <div className="text-center">{formatMoney(props.getValue<number>())}</div>
     ),
   },
   {
     accessorKey: "qty",
-    header: () => <div className="text-center">qtd. Items</div>,
+    header: () => <div className="text-center">qtd</div>,
     cell: (props) => (
       <div className="text-center">{props.getValue<string>()}</div>
     ),
@@ -49,11 +49,11 @@ export const columns: ColumnDef<Order>[] = [
     cell: (props) => <Status status={props.getValue<StatusEnum>()} />,
   },
   {
-    accessorKey: "date",
-    header: () => <div className="text-center">Data</div>,
+    accessorKey: "category",
+    header: () => <div className="text-center">Categoria</div>,
     cell: (props) => (
       <div className="text-center">
-        {format(props.getValue<string>(), "dd/MM/yyyy, HH:mm")}
+        <Pill>{props.getValue<string>()}</Pill>
       </div>
     ),
   },
