@@ -18,7 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = props.id || props.name;
 
     return (
-      <>
+      <span>
         <label className="mb-1.5 text-xs" htmlFor={id}>
           {label}
         </label>
@@ -52,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <p className="pl-1 text-red-500 text-xs">{error}</p>
-      </>
+      </span>
     );
   },
 );

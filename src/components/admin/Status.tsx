@@ -1,10 +1,13 @@
 import { cn } from "@/lib/utils";
-import { CircleAlert, CircleCheck, Clock } from "lucide-react";
+import { AlertOctagon, CircleAlert, CircleCheck, Clock } from "lucide-react";
 
 export enum StatusEnum {
   PENDING = "pending",
   COMPLETED = "completed",
   REFUSED = "refused",
+  CRITIC = "critic",
+  FULL = "full",
+  EMPTY = "empty",
 }
 
 interface StatusProps {
@@ -24,6 +27,21 @@ const statusDicionary = {
   },
   [StatusEnum.REFUSED]: {
     label: "Recusado",
+    icon: <CircleAlert size={14} />,
+    style: "text-red-500",
+  },
+  [StatusEnum.CRITIC]: {
+    label: "Estoque crítico",
+    icon: <AlertOctagon size={14} />,
+    style: "text-yellow-500",
+  },
+  [StatusEnum.FULL]: {
+    label: "Em estoque",
+    icon: <CircleCheck size={14} />,
+    style: "text-green-500",
+  },
+  [StatusEnum.EMPTY]: {
+    label: "Sem estoque",
     icon: <CircleAlert size={14} />,
     style: "text-red-500",
   },

@@ -119,7 +119,6 @@ export default function Page() {
               variant="outline"
               size="sm"
               className="text-xs font-semibold"
-              onClick={() => setOpenDetails(true)}
             >
               <Filter />
               Filtrar
