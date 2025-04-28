@@ -4,13 +4,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 const HighlightsCarousel = () => {
   return (
-    <Carousel className="w-9/10 overflow-hidden rounded-md">
+    <Carousel className="w-8/10 overflow-hidden rounded-md">
       <CarouselContent className="h-96">
         <CarouselItem>
           <div className="flex h-full items-center justify-between rounded-md bg-black px-24 py-4 text-slate-100">
@@ -35,8 +33,6 @@ const HighlightsCarousel = () => {
           </div>
         </CarouselItem>
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   );
 };
