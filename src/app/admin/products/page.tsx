@@ -3,6 +3,7 @@ import { DataTable } from "@/components/admin/DataTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Filter, PlusCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { columns, Product } from "./columns";
 
 const data: Product[] = [
@@ -89,6 +90,7 @@ const data: Product[] = [
 ];
 
 export default function Page() {
+  const { push } = useRouter();
   return (
     <div className="flex grow flex-col gap-4">
       <div className="flex justify-between">
@@ -99,17 +101,13 @@ export default function Page() {
             <Filter />
             Filtrar
           </Button>
-          <Button size="sm" className="text-xs font-semibold">
+          <Button size="sm" className="text-xs font-semibold" onClick={()=> push('products/new')}>
             <PlusCircle />
             Novo produto
           </Button>
         </div>
       </div>
-      <DataTable
-        onClickRow={(o) => console.log(o.id)}
-        columns={columns}
-        data={data}
-      />
+      <DataTable onClickRow={(o) => push(`products/${o.id}`)} columns={columns} data={data} />
     </div>
   );
 }
