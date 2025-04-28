@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { KeyPhonicIcon } from "@/assets/icons/KeyPhonic";
 import { useAuth } from "@/hooks/useAuth";
 import { MenuItem } from "./MenuItem";
-import { Profile } from "./profile";
+import { Profile } from "./Profile";
 
 interface HeaderProps {}
 export const Header = ({}: HeaderProps) => {
