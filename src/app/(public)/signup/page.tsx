@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 const loginFormSchema = z.object({
+  name: z.string(),
   email: z.string().email("e-mail inválido"),
   password: z.string().min(1, "* obrigatório"),
 });
@@ -24,17 +24,22 @@ export default function LoginPage() {
     resolver: zodResolver(loginFormSchema),
   });
 
+  // TODO: redirect to root
   const onSubmit = async (formValues: loginFormType) => {
-    const { data, error } = await authClient.signIn.email(
+    const { data, error } = await authClient.signUp.email(
       {
+        name: formValues.name,
         email: formValues.email,
         password: formValues.password,
-        rememberMe: true,
       },
       {
-        //callbacks
+        onError: (ctx) => {
+          alert(ctx.error.message);
+        },
       },
     );
+
+    console.log(data, error);
   };
 
   return (
@@ -46,13 +51,12 @@ export default function LoginPage() {
         <h1 className="mb-8 text-center font-bold text-3xl">KeyPhonic</h1>
 
         <div className="mb-5 space-y-2.5">
+          <Input label="Nome" {...register("name")} error={errors.name?.message} />
           <Input label="E-mail" {...register("email")} error={errors.email?.message} />
           <Input label="Senha" type="password" {...register("password")} error={errors.password?.message} />
         </div>
 
         <Button type="submit">Entrar</Button>
-
-        <Link href="/signup">Não tem conta?</Link>
       </form>
     </div>
   );

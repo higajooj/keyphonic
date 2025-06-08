@@ -1,10 +1,19 @@
+"use client";
+
 import { CircleUser, MapPin } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useEffect } from "react";
+import { authClient } from "@/lib/auth-client";
 import Container from "../keyphonic/container";
 import { Input } from "../ui/input";
 
 const Header = () => {
+  const session = authClient.useSession();
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
+
   return (
     <>
       <div className="flex items-center justify-end gap-x-2 bg-black px-4 py-2 text-gray-200 text-xs">
@@ -24,10 +33,17 @@ const Header = () => {
             <Input name="search" variant="search" />
           </div>
 
-          <Link className="flex items-center gap-x-2" href="/login">
-            <CircleUser size={16} />
-            <span>Sign in</span>
-          </Link>
+          {session.data ? (
+            <Link className="flex items-center gap-x-2" href="/profile">
+              <CircleUser size={16} />
+              <span>{session.data.user.name}</span>
+            </Link>
+          ) : (
+            <Link className="flex items-center gap-x-2" href="/login">
+              <CircleUser size={16} />
+              <span>Sign in</span>
+            </Link>
+          )}
         </div>
       </Container>
     </>
