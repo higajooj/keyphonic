@@ -1,4 +1,9 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, doublePrecision, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+
+const timestamps = {
+  createdAt: timestamp("created_at").$defaultFn(() => /* @__PURE__ */ new Date()),
+  updatedAt: timestamp("updated_at").$defaultFn(() => /* @__PURE__ */ new Date()),
+};
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -8,12 +13,7 @@ export const user = pgTable("user", {
     .$defaultFn(() => false)
     .notNull(),
   image: text("image"),
-  createdAt: timestamp("created_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-  updatedAt: timestamp("updated_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
+  ...timestamps,
 });
 
 export const session = pgTable("session", {
@@ -25,8 +25,7 @@ export const session = pgTable("session", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  ...timestamps,
 });
 
 export const account = pgTable("account", {
@@ -43,8 +42,7 @@ export const account = pgTable("account", {
   refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
   scope: text("scope"),
   password: text("password"),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  ...timestamps,
 });
 
 export const verification = pgTable("verification", {
@@ -52,6 +50,22 @@ export const verification = pgTable("verification", {
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
   expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at").$defaultFn(() => /* @__PURE__ */ new Date()),
-  updatedAt: timestamp("updated_at").$defaultFn(() => /* @__PURE__ */ new Date()),
+  ...timestamps,
+});
+
+export const product_category = pgTable("product_category", {
+  id: serial().primaryKey(),
+  name: text().notNull(),
+  description: text(),
+});
+
+export const product = pgTable("product_category", {
+  id: serial().primaryKey(),
+  name: text().notNull(),
+  description: text().notNull(),
+  value: doublePrecision().notNull(),
+  qty_stock: integer(),
+  category: integer("category_id")
+    .references(() => product_category.id)
+    .notNull(),
 });
