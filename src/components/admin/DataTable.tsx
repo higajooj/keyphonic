@@ -1,20 +1,7 @@
 "use client";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -22,11 +9,7 @@ interface DataTableProps<TData, TValue> {
   onClickRow?: (row: TData) => void;
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-  onClickRow,
-}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, onClickRow }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -45,16 +28,8 @@ export function DataTable<TData, TValue>({
             >
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead
-                    className="py-5 font-semibold first:pl-8 last:pr-8"
-                    key={header.id}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                  <TableHead className="py-5 font-semibold first:pl-8 last:pr-8" key={header.id}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 );
               })}
@@ -72,10 +47,7 @@ export function DataTable<TData, TValue>({
                 onClick={() => onClickRow && onClickRow(row.original)}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    className="py-5 first:pl-8 last:pr-8"
-                    key={cell.id}
-                  >
+                  <TableCell className="py-5 first:pl-8 last:pr-8" key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
