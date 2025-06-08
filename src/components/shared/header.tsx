@@ -24,9 +24,9 @@ const Header = () => {
             <Input name="search" variant="search" />
           </div>
 
-          <Link className="flex items-center gap-x-2" href="/">
+          <Link className="flex items-center gap-x-2" href="/login">
             <CircleUser size={16} />
-            <span>Sign up</span>
+            <span>Sign in</span>
           </Link>
         </div>
       </Container>
