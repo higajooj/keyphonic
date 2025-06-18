@@ -6,6 +6,9 @@ import {
   EnvironmentVariables,
   EnvironmentVariablesSchema,
 } from 'src/config/env';
+import { JwtStrategy } from '../strategies/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtGuard } from '../guards/jwt.guard';
 
 @Module({
   imports: [
@@ -17,6 +20,13 @@ import {
     ...modules,
   ],
   controllers: [],
-  providers: [...providers],
+  providers: [
+    JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
+    ...providers,
+  ],
 })
 export class AppModule {}
