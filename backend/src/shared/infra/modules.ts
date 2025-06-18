@@ -1,3 +1,3 @@
-import { AppModule } from 'src/app.module';
+import { UserModule } from 'src/domains/user/user.module';
 
-export const modules = [AppModule];
+export const modules = [UserModule];
