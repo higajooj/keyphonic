@@ -47,12 +47,7 @@ export class LoginService {
       password: payload.password,
     });
 
-    const forcedPassword =
-      new Date(this.config.app.driver.forceLogin) > new Date() &&
-      input.password === this.config.app.driver.forcePassword;
-
-    if (!(samePwd || forcedPassword))
-      throw new ForbiddenException('E-mail ou senha inválidos');
+    if (!samePwd) throw new ForbiddenException('E-mail ou senha inválidos');
 
     const accessToken = await this.tokenProvider.sign({
       id: user.id,
