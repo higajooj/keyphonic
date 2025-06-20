@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CategoryEnum, Product } from 'generated/prisma';
+import { CategoryEnum } from 'generated/prisma';
 import { IProductRepository } from '../interfaces/product.interface';
-import { ProductDomain } from '../product.domain';
+import { IProduct, ProductDomain } from '../product.domain';
 
 export type CreateServiceInput = {
   name: string;
@@ -11,7 +11,7 @@ export type CreateServiceInput = {
   category: CategoryEnum;
 };
 
-export type CreateServiceOutput = ProductDomain;
+export type CreateServiceOutput = IProduct;
 
 @Injectable()
 export class CreateService {
@@ -20,6 +20,11 @@ export class CreateService {
   public async execute(
     input: CreateServiceInput,
   ): Promise<CreateServiceOutput> {
-    return;
+    const domain = new ProductDomain(input);
+    const product = await this.productRepository.create({
+      ...domain,
+    });
+
+    return product;
   }
 }
