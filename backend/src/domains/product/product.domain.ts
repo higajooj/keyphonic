@@ -4,12 +4,25 @@ import BaseDomain, {
   BaseDomainInterface,
 } from 'src/shared/domain/base-domain.domain';
 
+export type IProduct = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  qtd: number;
+  category: CategoryEnum;
+  thumbnail: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 type CreateProductInput = {
   name: string;
   description: string;
   price: number;
   qtd: number;
   category: CategoryEnum;
+  isActive?: boolean;
 } & BaseDomainInterface;
 
 type UpdateProductInput = Partial<
@@ -24,6 +37,7 @@ export class ProductDomain extends BaseDomain {
   price: number;
   qtd: number;
   category: CategoryEnum;
+  isActive: boolean;
 
   constructor(props: CreateProductInput) {
     super();
@@ -35,6 +49,7 @@ export class ProductDomain extends BaseDomain {
     this.price = payload.price;
     this.qtd = payload.qtd;
     this.category = payload.category;
+    this.isActive = payload.isActive;
   }
 
   update(input: UpdateProductInput) {
@@ -47,6 +62,10 @@ export class ProductDomain extends BaseDomain {
     this.price = sanitizedPayload.price;
     this.qtd = sanitizedPayload.qtd;
     this.category = sanitizedPayload.category;
+  }
+
+  delete() {
+    this.isActive = false;
   }
 
   private _validate(input: CreateProductInput) {
@@ -64,6 +83,7 @@ export class ProductDomain extends BaseDomain {
       price: input.price,
       qtd: input.qtd || 0,
       category: input.category,
+      isActive: input.isActive !== undefined ? input.isActive : true,
     };
   }
 }
