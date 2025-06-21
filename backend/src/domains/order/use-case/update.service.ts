@@ -33,7 +33,6 @@ export class UpdateOrderService {
     const domain = new OrderDomain(order);
 
     domain.update({
-      addressId: input.addressId,
       paymentMethod: input.paymentMethod,
     });
 

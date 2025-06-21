@@ -44,7 +44,7 @@ export class CreateService {
 
     const order = await this.orderRepository.create({
       ...domain,
-      address: { connect: { id: domain.addressId } },
+      address: { connect: { id: input.addressId } },
     });
 
     await this.createOrderItems(order.id, products, items);
@@ -79,7 +79,6 @@ export class CreateService {
         productId: product.id,
         price: product.price,
         qtd: item.quantity,
-        subtotal: product.price * item.quantity,
       };
     });
 

@@ -16,7 +16,7 @@ export class OrderRepository
   implements IOrderRepository
 {
   constructor(private readonly repository: PrismaService) {
-    super('orders', repository);
+    super('order', repository);
   }
 
   async findByUnique(

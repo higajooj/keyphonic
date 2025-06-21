@@ -19,16 +19,14 @@ export type IOrder = {
 };
 
 type CreateOrderInput = {
-  addressId: string;
   paymentMethod: PaymentMethodEnum;
 
   delivery_fee?: number;
   total?: number;
 } & BaseDomainInterface;
 
-type UpdateOrderInput = Partial<Pick<IOrder, 'paymentMethod' | 'addressId'>>;
+type UpdateOrderInput = Partial<Pick<IOrder, 'paymentMethod'>>;
 export class OrderDomain extends BaseDomain {
-  addressId: string;
   paymentMethod: PaymentMethodEnum;
   delivery_fee: number;
   total: number;
@@ -38,7 +36,6 @@ export class OrderDomain extends BaseDomain {
     this._validate(props);
     const payload = this._sanitize(props);
 
-    this.addressId = payload.addressId;
     this.paymentMethod = payload.paymentMethod;
     this.delivery_fee = payload.delivery_fee ?? 10;
     this.total = payload.total;
@@ -50,14 +47,11 @@ export class OrderDomain extends BaseDomain {
     const sanitizedPayload = this._sanitize(Object.assign(payload, input));
 
     this.paymentMethod = sanitizedPayload.paymentMethod;
-    this.addressId = sanitizedPayload.addressId;
   }
 
   private _validate(input: CreateOrderInput) {
     if (input.id) return;
-    if (!input.addressId) {
-      throw new BadRequestException('addressId is required');
-    }
+
     if (!input.paymentMethod) {
       throw new BadRequestException('paymentMethod is required');
     }
@@ -65,7 +59,6 @@ export class OrderDomain extends BaseDomain {
 
   private _sanitize(input: CreateOrderInput) {
     return {
-      addressId: input.addressId,
       paymentMethod: input.paymentMethod,
       delivery_fee: Number(input.delivery_fee) || null,
       total: Number(input.total) || null,
