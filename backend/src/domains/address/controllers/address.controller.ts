@@ -25,22 +25,22 @@ export class AddressController {
   ) {}
 
   @Post('')
-  createProduct(@Body() input: CreateAddressBody): Promise<any> {
+  createAddress(@Body() input: CreateAddressBody): Promise<any> {
     return this.createService.execute(input);
   }
 
   @Get(':id')
-  getProductById(@Param() { id }: IdParams) {
+  getAddressById(@Param() { id }: IdParams) {
     return this.getOneService.execute({ id });
   }
 
   @Put(':id')
-  updateProduct(@Param() { id }: IdParams, @Body() body: UpdateAddressBody) {
+  updateAddress(@Param() { id }: IdParams, @Body() body: UpdateAddressBody) {
     return this.updateService.execute({ id, ...body });
   }
 
   @Delete(':id')
-  deleteProduct(@Param() { id }: IdParams) {
+  deleteAddress(@Param() { id }: IdParams) {
     return this.deleteService.execute({ id });
   }
 }

@@ -74,8 +74,8 @@ model Address {
 model OrderItem {
   id String @id @default(uuid())
 
-  qtd      Int
-  subTotal Int @map("sub_total")
+  qtd   Int
+  price Int @map("price")
 
   orderId   String
   productId String
