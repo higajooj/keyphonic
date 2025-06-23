@@ -8,6 +8,7 @@ import { GetOneService } from './use-case/get-one.service';
 import { GetAllService } from './use-case/get-all.service';
 import { UpdateService } from './use-case/update.service';
 import { DeleteService } from './use-case/delete.service';
+import { UploadService } from './use-case/upload.service';
 
 @Module({
   imports: [],
@@ -20,6 +21,7 @@ import { DeleteService } from './use-case/delete.service';
     GetAllService,
     UpdateService,
     DeleteService,
+    UploadService
   ],
 })
 export class ProductModule {}

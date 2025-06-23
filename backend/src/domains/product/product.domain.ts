@@ -11,7 +11,7 @@ export type IProduct = {
   price: number;
   qtd: number;
   category: CategoryEnum;
-  thumbnail: string | null;
+  galery: string[] | null;
   createdAt: Date;
   updatedAt: Date;
 };

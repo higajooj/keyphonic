@@ -4,9 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateService } from '../use-case/create.service';
 import { CreateProductBody } from './dto/create-product.dto';
@@ -17,6 +20,13 @@ import { GetAllService } from '../use-case/get-all.service';
 import { UpdateService } from '../use-case/update.service';
 import { UpdateProductBody } from './dto/update-product.dto';
 import { DeleteService } from '../use-case/delete.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import {
+  editFileName,
+  imageFileFilter,
+} from 'src/shared/utils/image-upload-utils';
+import { UploadService } from '../use-case/upload.service';
 
 @Controller('product')
 export class ProductController {
@@ -26,6 +36,7 @@ export class ProductController {
     private readonly getAllService: GetAllService,
     private readonly updateService: UpdateService,
     private readonly deleteService: DeleteService,
+    private readonly uploadService: UploadService,
   ) {}
 
   @Post('')
@@ -58,6 +69,21 @@ export class ProductController {
   @Put(':id')
   updateProduct(@Param() { id }: IdParams, @Body() body: UpdateProductBody) {
     return this.updateService.execute({ id, ...body });
+  }
+
+  @Patch(':productId/upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      fileFilter: imageFileFilter,
+      limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+    }),
+  )
+  async uploadImage(
+    @Param('productId') productId: string,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const result = await this.uploadService.execute({ productId, file });
+    return result;
   }
 
   @Delete(':id')

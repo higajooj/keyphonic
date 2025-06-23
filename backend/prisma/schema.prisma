@@ -42,7 +42,7 @@ model Product {
   price       Int
   qtd         Int
   category    CategoryEnum
-  thumbnail   String?
+  galery      String[]
 
   isActive Boolean @default(true) @map("is_active")
 
