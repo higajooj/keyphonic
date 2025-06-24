@@ -21,12 +21,9 @@ import { UpdateService } from '../use-case/update.service';
 import { UpdateProductBody } from './dto/update-product.dto';
 import { DeleteService } from '../use-case/delete.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import {
-  editFileName,
-  imageFileFilter,
-} from 'src/shared/utils/image-upload-utils';
+import { imageFileFilter } from 'src/shared/utils/image-upload-utils';
 import { UploadService } from '../use-case/upload.service';
+import { AllowPublicAccess } from 'src/shared/decorators/allow-public-access.decorator';
 
 @Controller('product')
 export class ProductController {
@@ -45,6 +42,7 @@ export class ProductController {
   }
 
   @Get('')
+  @AllowPublicAccess()
   getProducts(@Query() query: GetAllProductsRequestDTO) {
     const filter = {
       search: query.search,
@@ -62,6 +60,7 @@ export class ProductController {
   }
 
   @Get(':id')
+  @AllowPublicAccess()
   getProductById(@Param() { id }: IdParams) {
     return this.getOneService.execute({ id });
   }

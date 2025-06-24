@@ -14,6 +14,7 @@ import { DeleteService } from '../use-case/delete.service';
 import { IdParams } from 'src/shared/dto/id-param.dto';
 import { CreateAddressBody } from './dto/create-address.dto';
 import { UpdateAddressBody } from './dto/update-address.dto';
+import { AllowPublicAccess } from 'src/shared/decorators/allow-public-access.decorator';
 
 @Controller('address')
 export class AddressController {
@@ -25,6 +26,7 @@ export class AddressController {
   ) {}
 
   @Post('')
+  @AllowPublicAccess()
   createAddress(@Body() input: CreateAddressBody): Promise<any> {
     return this.createService.execute(input);
   }
