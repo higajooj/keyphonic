@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (input: LoginInput) => {
     console.log(input);
-    const { data } = await httpClient.post("/login", { input });
+    const { data } = await httpClient.post("auth/login", { ...input });
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, data.accessToken);
     setIsAuthenticated(true);
     push("/admin/orders");

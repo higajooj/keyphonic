@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
 
 const loginFormSchema = z.object({
   name: z.string(),
@@ -26,20 +25,9 @@ export default function LoginPage() {
 
   // TODO: redirect to root
   const onSubmit = async (formValues: loginFormType) => {
-    const { data, error } = await authClient.signUp.email(
-      {
-        name: formValues.name,
-        email: formValues.email,
-        password: formValues.password,
-      },
-      {
-        onError: (ctx) => {
-          alert(ctx.error.message);
-        },
-      },
-    );
 
-    console.log(data, error);
+
+    console.log(formValues);
   };
 
   return (
