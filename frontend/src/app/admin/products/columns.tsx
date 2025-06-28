@@ -1,25 +1,17 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
 import { Pill } from "@/components/admin/Pill";
 import Status, { StatusEnum } from "@/components/admin/Status";
+import { Product } from "@/entities/Product";
 import { formatMoney } from "@/lib/utils";
-
-export type Product = {
-  id: string;
-  name: string;
-  price: number;
-  qty: number;
-  status: "critic" | "full" | "empty";
-  category: "Keyboard" | "Headphone";
-};
+import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "id",
     header: () => <div className="text-center">#</div>,
     cell: (props) => (
-      <div className="text-center">#{props.getValue<string>()}</div>
+      <div className="text-center">{props.getValue<string>()}</div>
     ),
   },
   {
@@ -37,7 +29,7 @@ export const columns: ColumnDef<Product>[] = [
     ),
   },
   {
-    accessorKey: "qty",
+    accessorKey: "qtd",
     header: () => <div className="text-center">qtd</div>,
     cell: (props) => (
       <div className="text-center">{props.getValue<string>()}</div>

@@ -5,9 +5,9 @@ export enum StatusEnum {
   PENDING = "PENDING",
   COMPLETED = "COMPLETED",
   REFUSED = "REFUSED",
-  CRITIC = "critic",
-  FULL = "full",
-  EMPTY = "empty",
+  CRITIC = "CRITIC",
+  FULL = "FULL",
+  EMPTY = "EMPTY",
 }
 
 interface StatusProps {

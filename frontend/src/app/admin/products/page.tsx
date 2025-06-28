@@ -1,33 +1,45 @@
 "use client";
 
-import { Filter, PlusCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { DataTable } from "@/components/admin/DataTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { columns, Product } from "./columns";
-
-const data: Product[] = [];
+import { useProducts } from "@/hooks/useProducts";
+import { Filter, PlusCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { columns } from "./columns";
 
 const ProductsPage = () => {
   const { push } = useRouter();
+  const { products: data, handleSearch } = useProducts();
   return (
     <div className="flex grow flex-col gap-4">
       <div className="flex justify-between">
-        <Input name="search" placeholder="Pesquisar" variant="search" />
+        <Input
+          name="search"
+          placeholder="Pesquisar"
+          variant="search"
+          onChange={(e) => handleSearch(e.currentTarget.value)}
+        />
 
         <div className="space-x-2">
-          <Button className="font-semibold text-xs" size="sm" variant="outline">
+          <Button className="text-xs font-semibold" size="sm" variant="outline">
             <Filter />
             Filtrar
           </Button>
-          <Button className="font-semibold text-xs" onClick={() => push("products/new")} size="sm">
-            <PlusCircle />
-            Novo produto
-          </Button>
+          <Link href={"products/new"}>
+            <Button className="text-xs font-semibold" size="sm">
+              <PlusCircle />
+              Novo produto
+            </Button>
+          </Link>
         </div>
       </div>
-      <DataTable columns={columns} data={data} onClickRow={(o) => push(`products/${o.id}`)} />
+      <DataTable
+        columns={columns}
+        data={data}
+        onClickRow={(o) => push(`products/${o.id}`)}
+      />
     </div>
   );
 };
