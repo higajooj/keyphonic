@@ -1,7 +1,7 @@
 "use client";
 
 import { localStorageKeys } from "@/config/localStorageKeys";
-import { httpClient } from "@/lib/httpClient";
+import AuthService from "@/services/AuthService";
 import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useState } from "react";
 
@@ -24,10 +24,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (input: LoginInput) => {
     console.log(input);
-    const { data } = await httpClient.post("auth/login", { ...input });
+    const data = await AuthService.login(input);
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, data.accessToken);
+
     setIsAuthenticated(true);
-    push("/admin/orders");
+    push("/admin");
   };
 
   const logout = () => {

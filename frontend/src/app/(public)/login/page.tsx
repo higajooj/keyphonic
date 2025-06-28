@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const loginFormSchema = z.object({
@@ -30,7 +31,10 @@ export default function LoginPage() {
       await login(formValues);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      alert(error?.response?.data?.message || error);
+      console.log(error);
+      toast.error(
+        error.message || "Houve um erro ao logar. Tente novamente mais tarde",
+      );
     }
   };
 
