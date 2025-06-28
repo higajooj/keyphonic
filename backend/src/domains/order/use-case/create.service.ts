@@ -41,6 +41,7 @@ export class CreateService {
     const domain = new OrderDomain(input);
 
     domain.calculateOrderTotal(products, items);
+    domain.calculateProductsQtd(products, items);
 
     const order = await this.orderRepository.create({
       ...domain,

@@ -13,6 +13,7 @@ export type IOrder = {
   paymentMethod: PaymentMethodEnum;
   delivery_fee: number;
   total: number;
+  qtd: number;
 
   createdAt: Date;
   updatedAt: Date;
@@ -23,6 +24,7 @@ type CreateOrderInput = {
 
   delivery_fee?: number;
   total?: number;
+  qtd?: number;
 } & BaseDomainInterface;
 
 type UpdateOrderInput = Partial<Pick<IOrder, 'paymentMethod'>>;
@@ -30,6 +32,7 @@ export class OrderDomain extends BaseDomain {
   paymentMethod: PaymentMethodEnum;
   delivery_fee: number;
   total: number;
+  qtd: number;
 
   constructor(props: CreateOrderInput) {
     super();
@@ -39,6 +42,7 @@ export class OrderDomain extends BaseDomain {
     this.paymentMethod = payload.paymentMethod;
     this.delivery_fee = payload.delivery_fee ?? 10;
     this.total = payload.total;
+    this.qtd = payload.qtd;
   }
 
   update(input: UpdateOrderInput) {
@@ -62,6 +66,7 @@ export class OrderDomain extends BaseDomain {
       paymentMethod: input.paymentMethod,
       delivery_fee: Number(input.delivery_fee) || null,
       total: Number(input.total) || null,
+      qtd: Number(input.qtd) || null,
     };
   }
 
@@ -81,5 +86,16 @@ export class OrderDomain extends BaseDomain {
   calculateOrderTotal(products: IProduct[], items: ItemsInput[]) {
     this.total =
       this.calculateProductsTotal(products, items) + this.delivery_fee;
+  }
+
+  calculateProductsQtd(products: IProduct[], items: ItemsInput[]) {
+    this.qtd = items.reduce((acc, item) => {
+      const product = products.find((p) => p.id === item.productId);
+      if (!product) {
+        throw new BadRequestException(`Product ${item.productId} not found`);
+      }
+
+      return acc + item.quantity;
+    }, 0);
   }
 }

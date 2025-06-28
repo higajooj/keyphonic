@@ -93,6 +93,12 @@ enum PaymentMethodEnum {
   CASH
 }
 
+enum StatusEnum {
+  PENDING
+  COMPLETED
+  REFUSED
+}
+
 model Order {
   id String @id @default(uuid())
 
@@ -100,6 +106,8 @@ model Order {
   paymentMethod PaymentMethodEnum
   delivery_fee  Int
   total         Int
+  qtd           Int               @default(1)
+  status        StatusEnum        @default(PENDING)
 
   address   Address     @relation(fields: [addressId], references: [id])
   OrderItem OrderItem[]

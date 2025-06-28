@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "orders" ADD COLUMN     "qtd" INTEGER NOT NULL DEFAULT 1;

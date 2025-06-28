@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { ChartConfig } from "@/components/ui/chart";
 import { Input } from "@/components/ui/input";
 import { formatMoney } from "@/lib/utils";
+import OrderService from "@/services/OrderService";
+import { Order } from "@/services/OrderService/types";
 import { Calendar, Filter } from "lucide-react";
-import { useState } from "react";
-import { columns, Order } from "./columns";
+import { useEffect, useState } from "react";
+import { columns } from "./columns";
 const chartData = [
   { month: "January", value: 80000 },
   { month: "February", value: 200000 },
@@ -49,60 +51,20 @@ const statisticData = [
   },
 ];
 
-const data: Order[] = [
-  {
-    id: "728ed52f",
-    client: "Sarah Fernandez",
-    total: 170,
-    qty: 3,
-    status: "pending",
-    date: new Date("2025-02-14").toISOString(),
-  },
-  {
-    id: "728ed52f",
-    client: "Camila Rodriguez",
-    total: 1150,
-    qty: 6,
-    status: "completed",
-    date: new Date("2025-02-13").toISOString(),
-  },
-  {
-    id: "728ed52f",
-    client: "Igor Nascimento",
-    total: 980,
-    qty: 1,
-    status: "refused",
-    date: new Date("2025-02-12").toISOString(),
-  },
-  {
-    id: "728ed52f",
-    client: "Sarah Fernandez",
-    total: 170,
-    qty: 3,
-    status: "pending",
-    date: new Date("2025-02-14").toISOString(),
-  },
-  {
-    id: "728ed52f",
-    client: "Camila Rodriguez",
-    total: 1150,
-    qty: 6,
-    status: "completed",
-    date: new Date("2025-02-13").toISOString(),
-  },
-  {
-    id: "728ed52f",
-    client: "Igor Nascimento",
-    total: 980,
-    qty: 1,
-    status: "refused",
-    date: new Date("2025-02-12").toISOString(),
-  },
-];
-
 export default function Page() {
   const [openDetails, setOpenDetails] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState<string>("");
+  const [data, setData] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: newData } = await OrderService.getOrders();
+      setData(newData);
+      console.log(newData);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSelectOrder = (orderId: string) => {
     setSelectedOrderId(orderId);
@@ -127,7 +89,7 @@ export default function Page() {
           <OrdersChart chartConfig={chartConfig} chartData={chartData} />
         </div>
 
-        <div className="flex sm:min-w-[412px] flex-col justify-start rounded-xl border p-8 pb-0">
+        <div className="flex flex-col justify-start rounded-xl border p-8 pb-0 sm:min-w-[412px]">
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold">Resultado</p>
             <Button
@@ -142,12 +104,19 @@ export default function Page() {
 
           <div className="flex grow flex-col justify-between gap-2 py-4 xl:justify-evenly xl:py-0">
             {statisticData.map(({ count, label, value }) => (
-              <div key={label} className="flex flex-col sm:flex-row sm:items-end justify-between">
+              <div
+                key={label}
+                className="flex flex-col justify-between sm:flex-row sm:items-end"
+              >
                 <span>
                   <p className="text-xs font-medium">{label}:</p>
-                  <p className="text-2xl sm:text-4xl font-bold">{formatMoney(value)}</p>
+                  <p className="text-2xl font-bold sm:text-4xl">
+                    {formatMoney(value)}
+                  </p>
                 </span>
-                <p className="text-sm sm:text-md font-medium text-gray-500">{count} pedidos</p>
+                <p className="sm:text-md text-sm font-medium text-gray-500">
+                  {count} pedidos
+                </p>
               </div>
             ))}
           </div>
