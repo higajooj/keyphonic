@@ -31,11 +31,24 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { push } = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<UserType | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
+
+    return !!accessToken;
+  });
+  const [user, setUser] = useState<UserType | null>(() => {
+    const stringUser = localStorage.getItem(localStorageKeys.USER);
+
+    if (!stringUser) return null;
+
+    const user = JSON.parse(stringUser);
+
+    return user;
+  });
 
   const handleStates = (data: { accessToken: string; user: UserType }) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, data.accessToken);
+    localStorage.setItem(localStorageKeys.USER, JSON.stringify(data.user));
     setUser(data.user);
     setIsAuthenticated(true);
   };
@@ -52,6 +65,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     console.log("logout");
     localStorage.removeItem(localStorageKeys.ACCESS_TOKEN);
+    localStorage.removeItem(localStorageKeys.USER);
+    setUser(null);
     setIsAuthenticated(false);
   };
 

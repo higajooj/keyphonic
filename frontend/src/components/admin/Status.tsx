@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 import { AlertOctagon, CircleAlert, CircleCheck, Clock } from "lucide-react";
 
 export enum StatusEnum {
-  PENDING = "pending",
-  COMPLETED = "completed",
-  REFUSED = "refused",
+  PENDING = "PENDING",
+  COMPLETED = "COMPLETED",
+  REFUSED = "REFUSED",
   CRITIC = "critic",
   FULL = "full",
   EMPTY = "empty",
