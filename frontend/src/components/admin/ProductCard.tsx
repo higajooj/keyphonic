@@ -18,7 +18,10 @@ export const ProductCard = ({
     <div className="flex justify-between rounded bg-gray-100 p-5">
       <div>
         {imgUrl ? (
-          <img src={imgUrl} className="aspect-square w-12 rounded-full" />
+          <img
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${imgUrl}`}
+            className="aspect-square w-12 rounded-full"
+          />
         ) : (
           <Package
             size={48}
@@ -27,9 +30,7 @@ export const ProductCard = ({
         )}
         <p className="text-sm font-semibold">{name}</p>
         {salesCount && (
-          <p className="text-xs text-gray-500">
-            {salesCount} compras no ultimo mês
-          </p>
+          <p className="text-xs text-gray-500">{salesCount} items comprados</p>
         )}
       </div>
       <Pill className="text-xs">{formatMoney(price)}</Pill>

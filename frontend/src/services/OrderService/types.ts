@@ -5,12 +5,28 @@ export interface GetOrdersParams extends PaginationParams {
   category?: string;
 }
 
+type ProductCategory = "OTHER" | "PHONE" | "KEYBOARD";
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  qtd: number;
+  category: ProductCategory;
+  galery: string[];
+  isActive: true;
+  createdAt: string;
+  updatedAt: string;
+};
+
 type OrderItem = {
   id: string;
   qtd: number;
   price: number;
   orderId: string;
   productId: string;
+  product?: Product;
   createdAt: string;
   updatedAt: string;
 };
@@ -31,13 +47,13 @@ export type Address = {
 
 type PaymentMethod = "CASH" | "CREDIT_CARD" | "DEBIT_CARD";
 
-type OrderStatus = "PENDING" | "REFUSED" | "COMPLETED"
+type OrderStatus = "PENDING" | "REFUSED" | "COMPLETED";
 
 export type Order = {
   id: string;
   addressId: string;
   paymentMethod: PaymentMethod;
-  status: OrderStatus
+  status: OrderStatus;
   delivery_fee: number;
   qtd: number;
   total: number;
