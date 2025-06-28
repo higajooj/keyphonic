@@ -10,9 +10,16 @@ interface LoginInput {
   password: string;
 }
 
+interface SignUpInput {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface AuthContextType {
   logout: () => void;
   login: (input: LoginInput) => Promise<void>;
+  signUp: (input: SignUpInput) => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -37,8 +44,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsAuthenticated(false);
   };
 
+  const signUp = async (input: SignUpInput) => {
+    console.log(input);
+    const data = await AuthService.register(input);
+    localStorage.setItem(localStorageKeys.ACCESS_TOKEN, data.accessToken);
+
+    setIsAuthenticated(true);
+    push("/admin");
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, signUp }}>
       {children}
     </AuthContext.Provider>
   );

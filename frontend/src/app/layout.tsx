@@ -26,15 +26,15 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          cz-shortcut-listen="true"
-        >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        cz-shortcut-listen="true"
+      >
+        <AuthProvider>
           {children}
-        </body>
-        <Toaster />
-      </AuthProvider>
+          <Toaster />
+        </AuthProvider>
+      </body>
     </html>
   );
 };
