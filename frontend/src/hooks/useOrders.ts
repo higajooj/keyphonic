@@ -1,5 +1,6 @@
+import { Order } from "@/entities/Order";
 import OrderService from "@/services/OrderService";
-import { GetOrdersParams, Order } from "@/services/OrderService/types";
+import { GetOrdersParams } from "@/services/OrderService/types";
 import { useEffect, useState } from "react";
 
 export const useOrders = () => {

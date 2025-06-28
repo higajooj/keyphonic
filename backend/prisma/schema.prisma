@@ -29,9 +29,15 @@ model User {
 }
 
 enum CategoryEnum {
-  PHONE
+  HEADPHONE
   KEYBOARD
   OTHER
+}
+
+enum ProductStatusEnum {
+  CRITIC
+  FULL
+  EMPTY
 }
 
 model Product {
@@ -42,6 +48,7 @@ model Product {
   price       Int
   qtd         Int
   category    CategoryEnum
+  status      ProductStatusEnum @default(FULL)
   galery      String[]
 
   isActive Boolean @default(true) @map("is_active")

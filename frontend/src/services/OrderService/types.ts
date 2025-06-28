@@ -1,3 +1,4 @@
+import { Order, PaymentMethod } from "@/entities/Order";
 import { PaginationParams, PaginationType } from "../types";
 
 export interface GetOrdersParams extends PaginationParams {
@@ -5,63 +6,6 @@ export interface GetOrdersParams extends PaginationParams {
   category?: string;
 }
 
-type ProductCategory = "OTHER" | "PHONE" | "KEYBOARD";
-
-type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  qtd: number;
-  category: ProductCategory;
-  galery: string[];
-  isActive: true;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type OrderItem = {
-  id: string;
-  qtd: number;
-  price: number;
-  orderId: string;
-  productId: string;
-  product?: Product;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type Address = {
-  id: string;
-  street: string;
-  number: string;
-  neighborhood: string;
-  zip_code: string;
-  complement: string | null;
-  city: string;
-  state: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type PaymentMethod = "CASH" | "CREDIT_CARD" | "DEBIT_CARD";
-
-type OrderStatus = "PENDING" | "REFUSED" | "COMPLETED";
-
-export type Order = {
-  id: string;
-  addressId: string;
-  paymentMethod: PaymentMethod;
-  status: OrderStatus;
-  delivery_fee: number;
-  qtd: number;
-  total: number;
-  OrderItem: OrderItem[];
-  address: Address;
-  createdAt: string;
-  updatedAt: string;
-};
 
 export type GetOrdersResponse = {
   data: Order[];

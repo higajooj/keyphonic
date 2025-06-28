@@ -10,7 +10,7 @@ import {
   UpdateOrderResponse,
 } from "./types";
 
-class AuthService {
+class OrderService {
   async getOrders(params?: GetOrdersParams) {
     const { data } = await httpClient
       .get<GetOrdersResponse>("order", { params })
@@ -65,4 +65,4 @@ class AuthService {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default new AuthService();
+export default new OrderService();
