@@ -52,6 +52,22 @@ export type GetOrdersResponse = {
   pagination: PaginationType;
 };
 
+export type ChartItem = {
+  month: string;
+  value: number;
+};
+
+export type StatisticItem = {
+  label: string;
+  value: number;
+  count: number;
+};
+
+export interface GetStatsResponse {
+  chart: ChartItem[];
+  statistics: StatisticItem[];
+}
+
 export type GetOrderByIdResponse = Order & {};
 
 export interface CreateOrderInput {

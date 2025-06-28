@@ -5,6 +5,7 @@ import {
   GetOrderByIdResponse,
   GetOrdersParams,
   GetOrdersResponse,
+  GetStatsResponse,
   UpdateOrderInput,
   UpdateOrderResponse,
 } from "./types";
@@ -13,6 +14,17 @@ class AuthService {
   async getOrders(params?: GetOrdersParams) {
     const { data } = await httpClient
       .get<GetOrdersResponse>("order", { params })
+      .catch((e) => {
+        console.log("service: ", e?.response?.data || e);
+        throw e?.response?.data || e;
+      });
+
+    return data;
+  }
+
+  async getOrdersStats() {
+    const { data } = await httpClient
+      .get<GetStatsResponse>("order/stats")
       .catch((e) => {
         console.log("service: ", e?.response?.data || e);
         throw e?.response?.data || e;

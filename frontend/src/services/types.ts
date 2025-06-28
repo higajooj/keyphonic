@@ -1,7 +1,7 @@
 export interface PaginationParams {
-  limit?: string;
-  order?: string;
-  skip?: string;
+  limit?: number;
+  order?: "-1" | "1";
+  skip?: number;
   sort?: string;
 }
 

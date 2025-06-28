@@ -5,26 +5,12 @@ import { SheetDetailOrder } from "@/components/admin/SheetDetailsOrder";
 import { Button } from "@/components/ui/button";
 import { ChartConfig } from "@/components/ui/chart";
 import { Input } from "@/components/ui/input";
+import { useOrders } from "@/hooks/useOrders";
+import { useOrdersStats } from "@/hooks/useOrdersStats";
 import { formatMoney } from "@/lib/utils";
-import OrderService from "@/services/OrderService";
-import { Order } from "@/services/OrderService/types";
-import { Calendar, Filter } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Calendar } from "lucide-react";
+import { useState } from "react";
 import { columns } from "./columns";
-const chartData = [
-  { month: "January", value: 80000 },
-  { month: "February", value: 200000 },
-  { month: "March", value: 120000 },
-  { month: "April", value: 109000 },
-  { month: "May", value: 130000 },
-  { month: "June", value: 140000 },
-  { month: "July", value: 80000 },
-  { month: "August", value: 230000 },
-  { month: "September", value: 120000 },
-  { month: "October", value: 190000 },
-  { month: "November", value: 130000 },
-  { month: "December", value: 140000 },
-];
 
 const chartConfig = {
   value: {
@@ -33,38 +19,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const statisticData = [
-  {
-    label: "Pagos",
-    value: 2278901,
-    count: 24,
-  },
-  {
-    label: "Em andamentos",
-    value: 1153.45,
-    count: 12,
-  },
-  {
-    label: "Cancelados",
-    value: 36457.89,
-    count: 43,
-  },
-];
-
 export default function Page() {
   const [openDetails, setOpenDetails] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState<string>("");
-  const [data, setData] = useState<Order[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data: newData } = await OrderService.getOrders();
-      setData(newData);
-      console.log(newData);
-    };
-
-    fetchData();
-  }, []);
+  const { orders: data, handleSearch } = useOrders();
+  const { chartData, statisticsData } = useOrdersStats();
 
   const handleSelectOrder = (orderId: string) => {
     setSelectedOrderId(orderId);
@@ -77,14 +36,6 @@ export default function Page() {
         <div className="grow rounded-xl border p-5">
           <div className="mb-4 flex justify-between">
             <p className="text-xl font-semibold">Pedidos R$</p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="text-xs font-semibold"
-            >
-              <Filter />
-              Filtrar
-            </Button>
           </div>
           <OrdersChart chartConfig={chartConfig} chartData={chartData} />
         </div>
@@ -97,13 +48,13 @@ export default function Page() {
               size="sm"
               className="text-xs font-semibold"
             >
-              Hoje
+              Este ano
               <Calendar />
             </Button>
           </div>
 
           <div className="flex grow flex-col justify-between gap-2 py-4 xl:justify-evenly xl:py-0">
-            {statisticData.map(({ count, label, value }) => (
+            {statisticsData.map(({ count, label, value }) => (
               <div
                 key={label}
                 className="flex flex-col justify-between sm:flex-row sm:items-end"
@@ -123,7 +74,12 @@ export default function Page() {
         </div>
       </div>
       <div className="flex grow flex-col gap-4">
-        <Input name="search" placeholder="Pesquisar" variant="search" />
+        <Input
+          name="search"
+          placeholder="Pesquisar"
+          variant="search"
+          onInput={(e) => handleSearch(e.currentTarget.value)}
+        />
         <DataTable
           onClickRow={(o) => handleSelectOrder(o.id)}
           columns={columns}

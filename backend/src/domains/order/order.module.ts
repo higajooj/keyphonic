@@ -11,6 +11,7 @@ import { IOrderItemRepository } from '../order-item/interfaces/order-item.interf
 import { OrderItemRepository } from '../order-item/repository/order-item.repository';
 import { IProductRepository } from '../product/interfaces/product.interface';
 import { ProductRepository } from '../product/repository/product.repository';
+import { GetStatsService } from './use-case/get-stats.service';
 
 @Module({
   imports: [],
@@ -24,6 +25,7 @@ import { ProductRepository } from '../product/repository/product.repository';
     GetOneOrderService,
     GetAllOrderService,
     UpdateOrderService,
+    GetStatsService,
   ],
 })
 export class OrderModule {}
