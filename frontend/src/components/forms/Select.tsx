@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Select as UISelect,
-} from "../ui/select";
+import { SelectContent, SelectItem, SelectTrigger, SelectValue, Select as UISelect } from "../ui/select";
 
 interface SelectProps {
   name: string;
@@ -17,14 +11,7 @@ interface SelectProps {
   id?: string;
   defaultValue?: string;
 }
-export const Select = ({
-  label,
-  error,
-  options,
-  onChange,
-  defaultValue,
-  ...props
-}: SelectProps) => {
+export const Select = ({ label, error, options, onChange, defaultValue, ...props }: SelectProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   useEffect(() => {
     if (defaultValue) setValue(defaultValue);

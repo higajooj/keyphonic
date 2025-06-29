@@ -49,46 +49,27 @@ export default function Page() {
       await ProductService.updateProduct(productId, data);
 
       if (files.length > 0) {
-        await Promise.all(
-          files.map((file) =>
-            ProductService.uploadProductPhoto(productId, file),
-          ),
-        );
+        await Promise.all(files.map((file) => ProductService.uploadProductPhoto(productId, file)));
       }
 
       toast.success("Produto atualizado com sucesso!");
       back();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(
-        error.message ||
-          "Erro ao atualizar o produto. Tente novamente mais tarde",
-      );
+      toast.error(error.message || "Erro ao atualizar o produto. Tente novamente mais tarde");
     }
   };
 
   return (
     <div className="mx-auto max-w-6xl p-6">
-      <span
-        className="mb-6 flex cursor-pointer items-center gap-2"
-        onClick={() => back()}
-      >
+      <span className="mb-6 flex cursor-pointer items-center gap-2" onClick={() => back()}>
         <CircleChevronLeft />
         <h1 className="text-2xl font-bold">Editar Produto</h1>
       </span>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 gap-8 lg:grid-cols-2"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <Input
-            value={productId}
-            label="#"
-            error={errors.id?.message}
-            disabled
-            {...register("id")}
-          />
+          <Input value={productId} label="#" error={errors.id?.message} disabled {...register("id")} />
 
           <Input
             label="Nome do produto"
@@ -114,13 +95,7 @@ export default function Page() {
               {...register("price")}
             />
 
-            <Input
-              label="Quantidade"
-              placeholder="30"
-              type="number"
-              error={errors.qtd?.message}
-              {...register("qtd")}
-            />
+            <Input label="Quantidade" placeholder="30" type="number" error={errors.qtd?.message} {...register("qtd")} />
           </div>
 
           <Select
@@ -143,18 +118,11 @@ export default function Page() {
           files={files}
           previews={previews}
           onFilesChange={setFiles}
-          onPreviewRemove={(index) =>
-            setPreviews((prev) => prev.filter((_, i) => i !== index))
-          }
+          onPreviewRemove={(index) => setPreviews((prev) => prev.filter((_, i) => i !== index))}
         />
 
         <div className="mt-8 flex justify-end gap-4 lg:col-span-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="rounded-full"
-          >
+          <Button type="button" variant="outline" size="sm" className="rounded-full">
             Cancelar
           </Button>
           <Button type="submit" size="sm" className="rounded-full">

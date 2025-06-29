@@ -22,12 +22,11 @@ const Header = () => {
             <h1 className="text-2xl font-bold">KeyPhonic</h1>
           </Link>
 
-					<div>
-						<Input name="search" variant="search" />
-					</div>
+          <div>
+            <Input name="search" variant="search" />
+          </div>
 
-
-					<div className="flex gap-x-2">
+          <div className="flex gap-x-2">
             <Cart />
 
             <Link className="flex items-center gap-x-2" href="/login">

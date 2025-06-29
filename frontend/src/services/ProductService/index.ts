@@ -11,52 +11,42 @@ import {
 
 class ProductService {
   async getProducts(params?: GetProductsParams) {
-    const { data } = await httpClient
-      .get<GetProductsResponse>("product", { params })
-      .catch((e) => {
-        console.log("service: ", e?.response?.data || e);
-        throw e?.response?.data || e;
-      });
+    const { data } = await httpClient.get<GetProductsResponse>("product", { params }).catch((e) => {
+      console.log("service: ", e?.response?.data || e);
+      throw e?.response?.data || e;
+    });
 
     return data;
   }
 
   async getProductById(id: string) {
-    const { data } = await httpClient
-      .get<GetProductByIdResponse>(`product/${id}`)
-      .catch((e) => {
-        throw e?.response?.data || e;
-      });
+    const { data } = await httpClient.get<GetProductByIdResponse>(`product/${id}`).catch((e) => {
+      throw e?.response?.data || e;
+    });
 
     return data;
   }
 
   async createProduct(input: CreateProductInput) {
-    const { data } = await httpClient
-      .post<CreateProductResponse>("product", input)
-      .catch((e) => {
-        throw e?.response?.data || e;
-      });
+    const { data } = await httpClient.post<CreateProductResponse>("product", input).catch((e) => {
+      throw e?.response?.data || e;
+    });
 
     return data;
   }
 
   async updateProduct(id: string, input: UpdateProductInput) {
-    const { data } = await httpClient
-      .put<UpdateProductResponse>(`product/${id}`, input)
-      .catch((e) => {
-        throw e?.response?.data || e;
-      });
+    const { data } = await httpClient.put<UpdateProductResponse>(`product/${id}`, input).catch((e) => {
+      throw e?.response?.data || e;
+    });
 
     return data;
   }
 
   async deleteProduct(id: string) {
-    const { data } = await httpClient
-      .delete<{ success: true }>(`product/${id}`)
-      .catch((e) => {
-        throw e?.response?.data || e;
-      });
+    const { data } = await httpClient.delete<{ success: true }>(`product/${id}`).catch((e) => {
+      throw e?.response?.data || e;
+    });
 
     return data;
   }

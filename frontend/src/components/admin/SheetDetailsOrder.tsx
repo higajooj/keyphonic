@@ -2,12 +2,7 @@ import { useOrder } from "@/hooks/useOrder";
 import { formatMoney } from "@/lib/utils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { ProductCard } from "./ProductCard";
 import Status, { StatusEnum } from "./Status";
@@ -18,11 +13,7 @@ interface SheetDetailOrderProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-
-export const SheetDetailOrder = ({
-  orderId,
-  ...props
-}: SheetDetailOrderProps) => {
+export const SheetDetailOrder = ({ orderId, ...props }: SheetDetailOrderProps) => {
   const { order } = useOrder(orderId);
   if (!order || !orderId) return null;
 
@@ -62,9 +53,7 @@ export const SheetDetailOrder = ({
         <div className="px-4">
           <Accordion type="multiple" defaultValue={["products", "order-info"]}>
             <AccordionItem value="products">
-              <AccordionTrigger className="font-semibold">
-                Produtos
-              </AccordionTrigger>
+              <AccordionTrigger className="font-semibold">Produtos</AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-4">
                   {order.OrderItem.map((o) => {
@@ -83,18 +72,14 @@ export const SheetDetailOrder = ({
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="order-info">
-              <AccordionTrigger className="font-semibold">
-                Pedido
-              </AccordionTrigger>
+              <AccordionTrigger className="font-semibold">Pedido</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   {orderInfos.map(({ label, value }) => (
                     <div className="flex items-baseline gap-2" key={label}>
                       <p className="text-sm text-gray-500">{label}</p>
                       <div className="h-0 grow border border-dashed" />
-                      <span className="max-w-[238px] text-right text-xs font-semibold">
-                        {value}
-                      </span>
+                      <span className="max-w-[238px] text-right text-xs font-semibold">{value}</span>
                     </div>
                   ))}
                 </div>

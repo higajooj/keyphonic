@@ -43,11 +43,7 @@ export default function Page() {
         <div className="flex flex-col justify-start rounded-xl border p-8 pb-0 sm:min-w-[412px]">
           <div className="flex items-center justify-between">
             <p className="text-lg font-semibold">Resultado</p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="text-xs font-semibold"
-            >
+            <Button variant="outline" size="sm" className="text-xs font-semibold">
               Este ano
               <Calendar />
             </Button>
@@ -55,19 +51,12 @@ export default function Page() {
 
           <div className="flex grow flex-col justify-between gap-2 py-4 xl:justify-evenly xl:py-0">
             {statisticsData.map(({ count, label, value }) => (
-              <div
-                key={label}
-                className="flex flex-col justify-between sm:flex-row sm:items-end"
-              >
+              <div key={label} className="flex flex-col justify-between sm:flex-row sm:items-end">
                 <span>
                   <p className="text-xs font-medium">{label}:</p>
-                  <p className="text-2xl font-bold sm:text-4xl">
-                    {formatMoney(value)}
-                  </p>
+                  <p className="text-2xl font-bold sm:text-4xl">{formatMoney(value)}</p>
                 </span>
-                <p className="sm:text-md text-sm font-medium text-gray-500">
-                  {count} pedidos
-                </p>
+                <p className="sm:text-md text-sm font-medium text-gray-500">{count} pedidos</p>
               </div>
             ))}
           </div>
@@ -80,16 +69,8 @@ export default function Page() {
           variant="search"
           onInput={(e) => handleSearch(e.currentTarget.value)}
         />
-        <DataTable
-          onClickRow={(o) => handleSelectOrder(o.id)}
-          columns={columns}
-          data={data}
-        />
-        <SheetDetailOrder
-          open={openDetails}
-          onOpenChange={setOpenDetails}
-          orderId={selectedOrderId}
-        />
+        <DataTable onClickRow={(o) => handleSelectOrder(o.id)} columns={columns} data={data} />
+        <SheetDetailOrder open={openDetails} onOpenChange={setOpenDetails} orderId={selectedOrderId} />
       </div>
     </div>
   );

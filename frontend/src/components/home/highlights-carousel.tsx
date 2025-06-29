@@ -1,10 +1,6 @@
 import * as React from "react";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 const HighlightsCarousel = () => {
   return (
@@ -13,9 +9,7 @@ const HighlightsCarousel = () => {
         <CarouselItem>
           <div className="flex h-full items-center justify-between rounded-md bg-black px-24 py-4 text-slate-100">
             <div className="flex flex-col gap-y-4">
-              <h1 className="font-semibold text-3xl">
-                Best deal online on keyboards
-              </h1>
+              <h1 className="font-semibold text-3xl">Best deal online on keyboards</h1>
               <h2 className="font-bold text-6xl">KEYCHRON</h2>
               <h2 className="font-bold text-6xl">Q3 PRO</h2>
               <span className="font-semibold text-2xl">UP to 20% OFF</span>

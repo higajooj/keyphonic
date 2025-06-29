@@ -14,10 +14,7 @@ interface InputProps extends ComponentProps<"input"> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    { className, type, label, error, variant = "default", mask, ...props },
-    ref,
-  ) => {
+  ({ className, type, label, error, variant = "default", mask, ...props }, ref) => {
     const [hide, setHide] = useState(true);
     const id = props.id || props.name;
 

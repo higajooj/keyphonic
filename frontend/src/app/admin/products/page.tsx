@@ -35,11 +35,7 @@ const ProductsPage = () => {
           </Link>
         </div>
       </div>
-      <DataTable
-        columns={columns}
-        data={data}
-        onClickRow={(o) => push(`products/${o.id}`)}
-      />
+      <DataTable columns={columns} data={data} onClickRow={(o) => push(`products/${o.id}`)} />
     </div>
   );
 };

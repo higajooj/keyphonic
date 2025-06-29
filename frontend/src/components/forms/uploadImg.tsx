@@ -11,14 +11,7 @@ interface UploadImgProps {
   onPreviewRemove?: (index: number) => void;
 }
 
-export const UploadImg = ({
-  name,
-  label,
-  files,
-  onFilesChange,
-  onPreviewRemove,
-  previews,
-}: UploadImgProps) => {
+export const UploadImg = ({ name, label, files, onFilesChange, onPreviewRemove, previews }: UploadImgProps) => {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const uploaded = Array.from(e.target.files);
@@ -44,10 +37,7 @@ export const UploadImg = ({
           {/* imagens já existentes */}
           {previews &&
             previews.map((url, index) => (
-              <div
-                key={`preview-${index}`}
-                className="group relative h-24 w-24"
-              >
+              <div key={`preview-${index}`} className="group relative h-24 w-24">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`}
                   alt="Preview"
@@ -95,14 +85,7 @@ export const UploadImg = ({
           >
             <UploadCloud className="mb-1 h-6 w-6" />
             <span className="text-center text-xs">Adicionar imagens</span>
-            <input
-              accept="image/*"
-              id={name}
-              type="file"
-              multiple
-              onChange={handleImageUpload}
-              className="hidden"
-            />
+            <input accept="image/*" id={name} type="file" multiple onChange={handleImageUpload} className="hidden" />
           </label>
         </CardContent>
       </Card>

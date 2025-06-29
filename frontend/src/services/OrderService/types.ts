@@ -6,7 +6,6 @@ export interface GetOrdersParams extends PaginationParams {
   category?: string;
 }
 
-
 export type GetOrdersResponse = {
   data: Order[];
   pagination: PaginationType;
@@ -49,9 +48,7 @@ export type CreateOrderResponse = {
   updatedAt: string;
 };
 
-export type UpdateOrderInput = Partial<
-  Pick<CreateOrderInput, "addressId" | "paymentMethod">
-> & {
+export type UpdateOrderInput = Partial<Pick<CreateOrderInput, "addressId" | "paymentMethod">> & {
   delivery_fee?: number;
 };
 

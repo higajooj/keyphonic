@@ -59,9 +59,7 @@ export default function Status({ status, onlyIcon = false }: StatusProps) {
         )}
       >
         {icon}
-        {!onlyIcon && (
-          <p className="text-center text-[10px] font-semibold">{label}</p>
-        )}
+        {!onlyIcon && <p className="text-center text-[10px] font-semibold">{label}</p>}
       </div>
     </div>
   );

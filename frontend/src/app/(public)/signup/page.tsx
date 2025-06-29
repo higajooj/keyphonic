@@ -33,10 +33,7 @@ export default function SignUpPage() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
-      toast.error(
-        error.message ||
-          "Houve um erro ao criar Conta. Tente novamente mais tarde",
-      );
+      toast.error(error.message || "Houve um erro ao criar Conta. Tente novamente mais tarde");
     }
   };
 
@@ -49,22 +46,9 @@ export default function SignUpPage() {
         <h1 className="mb-8 text-center text-3xl font-bold">KeyPhonic</h1>
 
         <div className="mb-5 space-y-2.5">
-          <Input
-            label="Nome"
-            {...register("name")}
-            error={errors.name?.message}
-          />
-          <Input
-            label="E-mail"
-            {...register("email")}
-            error={errors.email?.message}
-          />
-          <Input
-            label="Senha"
-            type="password"
-            {...register("password")}
-            error={errors.password?.message}
-          />
+          <Input label="Nome" {...register("name")} error={errors.name?.message} />
+          <Input label="E-mail" {...register("email")} error={errors.email?.message} />
+          <Input label="Senha" type="password" {...register("password")} error={errors.password?.message} />
         </div>
 
         <Button type="submit">Entrar</Button>
