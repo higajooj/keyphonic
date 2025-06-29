@@ -7,7 +7,7 @@ import { OrderDomain, IOrder } from '../order.domain';
 import { IOrderRepository } from '../interfaces/order.interface';
 import { PaymentMethodEnum } from 'generated/prisma';
 import { IProductRepository } from 'src/domains/product/interfaces/product.interface';
-import { IProduct } from 'src/domains/product/product.domain';
+import { IProduct, ProductDomain } from 'src/domains/product/product.domain';
 import { IOrderItemRepository } from 'src/domains/order-item/interfaces/order-item.interface';
 
 export type ItemsInput = { productId: string; quantity: number };
@@ -42,6 +42,8 @@ export class CreateService {
 
     domain.calculateOrderTotal(products, items);
     domain.calculateProductsQtd(products, items);
+
+    await this.updateProductsStock(products, items);
 
     const order = await this.orderRepository.create({
       ...domain,
@@ -84,5 +86,27 @@ export class CreateService {
     });
 
     await this.orderItemRepository.createMany(orderItems);
+  }
+
+  private async updateProductsStock(
+    products: IProduct[],
+    items: ItemsInput[],
+  ): Promise<void> {
+    const updates = items.map((item) => {
+      const product = products.find((p) => p.id === item.productId);
+      if (!product) {
+        throw new BadRequestException(
+          `Produto ${item.productId} não encontrado`,
+        );
+      }
+
+      const domain = new ProductDomain(product);
+
+      domain.updateStock(item.quantity);
+
+      return this.productsRepository.update({ id: product.id }, domain);
+    });
+
+    await Promise.all(updates);
   }
 }

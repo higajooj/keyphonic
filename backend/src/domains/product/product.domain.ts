@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { CategoryEnum } from 'generated/prisma';
+import { CategoryEnum, ProductStatusEnum, } from 'generated/prisma';
 import BaseDomain, {
   BaseDomainInterface,
 } from 'src/shared/domain/base-domain.domain';
@@ -11,6 +11,7 @@ export type IProduct = {
   price: number;
   qtd: number;
   category: CategoryEnum;
+  status: ProductStatusEnum;
   galery: string[] | null;
   createdAt: Date;
   updatedAt: Date;
@@ -22,6 +23,7 @@ type CreateProductInput = {
   price: number;
   qtd: number;
   category: CategoryEnum;
+  status?: ProductStatusEnum;
   isActive?: boolean;
 } & BaseDomainInterface;
 
@@ -37,6 +39,7 @@ export class ProductDomain extends BaseDomain {
   price: number;
   qtd: number;
   category: CategoryEnum;
+  status: ProductStatusEnum;
   isActive: boolean;
 
   constructor(props: CreateProductInput) {
@@ -50,6 +53,8 @@ export class ProductDomain extends BaseDomain {
     this.qtd = payload.qtd;
     this.category = payload.category;
     this.isActive = payload.isActive;
+
+    this._updateStatus();
   }
 
   update(input: UpdateProductInput) {
@@ -62,10 +67,35 @@ export class ProductDomain extends BaseDomain {
     this.price = sanitizedPayload.price;
     this.qtd = sanitizedPayload.qtd;
     this.category = sanitizedPayload.category;
+
+    this._updateStatus();
   }
 
   delete() {
     this.isActive = false;
+  }
+
+  updateStock(quantity: number) {
+    const newQtd = this.qtd - quantity;
+
+    if (newQtd < 0) {
+      throw new BadRequestException(
+        `Estoque insuficiente para o produto "${this.name}"`,
+      );
+    }
+
+    this.qtd = newQtd;
+    this._updateStatus();
+  }
+
+  private _updateStatus() {
+    if (this.qtd === 0) {
+      this.status = ProductStatusEnum.EMPTY;
+    } else if (this.qtd <= 20) {
+      this.status = ProductStatusEnum.CRITIC;
+    } else {
+      this.status = ProductStatusEnum.FULL;
+    }
   }
 
   private _validate(input: CreateProductInput) {
