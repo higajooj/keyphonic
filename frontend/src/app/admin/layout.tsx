@@ -10,12 +10,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
-    if (!user || !isAuthenticated) {
+    if (user === null || !isAuthenticated) {
       replace("/");
     }
   }, [isAuthenticated, replace, user]);
 
-  if (!user || !isAuthenticated) return null;
+  if (user === null || !isAuthenticated) return null;
 
   return (
     <section className="flex min-h-screen flex-col">

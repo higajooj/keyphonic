@@ -66,7 +66,7 @@ class ProductService {
     formData.append("file", file);
 
     const { data } = await httpClient
-      .post<{ success: true }>(`product/${id}`, formData, {
+      .patch<{ success: true }>(`product/${id}/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -11,6 +11,7 @@ import ProductService from "@/services/ProductService";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import { CircleChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -18,11 +19,14 @@ import { z } from "zod";
 export const newProductSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1, "Nome do produto é obrigatório"),
-  description: z.string().min(1, "Descrição é obrigatório").max(1500, "Descrição muito longa"),
+  description: z
+    .string()
+    .min(1, "Descrição é obrigatório")
+    .max(1500, "Descrição muito longa"),
   price: z.coerce
     .string()
     .min(1, "Valor é obrigatório")
-    .transform((v) => +v.replace(/\D/g,'')),
+    .transform((v) => +v.replace(/\D/g, "")),
   qtd: z.coerce.number().min(1, "Quantidade é obrigatória"),
   category: z.enum(ProductCategoryValues),
 });
@@ -31,6 +35,7 @@ export type NewProductType = z.infer<typeof newProductSchema>;
 
 const NewProductPage = () => {
   const { back } = useRouter();
+  const [images, setImages] = useState<File[]>([]);
 
   const {
     register,
@@ -42,7 +47,16 @@ const NewProductPage = () => {
   const onSubmit = async (data: NewProductType) => {
     console.log(data);
     try {
-      await ProductService.createProduct(data);
+      const product = await ProductService.createProduct(data);
+
+      if (images.length > 0) {
+        await Promise.all(
+          images.map((img) =>
+            ProductService.uploadProductPhoto(product.id, img),
+          ),
+        );
+      }
+
       toast.success("Produto criado com sucesso!");
       back();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -115,7 +129,14 @@ const NewProductPage = () => {
           />
         </div>
 
-        <UploadImg label="Miniatura" name="image" />
+        <UploadImg
+          label="Galeria"
+          name="image"
+          files={images}
+          onFilesChange={setImages}
+          previews={[]}
+          onPreviewRemove={() => {}}
+        />
 
         <div className="mt-8 flex justify-end gap-4 lg:col-span-2">
           <Button

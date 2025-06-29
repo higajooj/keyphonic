@@ -5,17 +5,17 @@ import { LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface ProfileProps {
-  name: string;
   role: string;
+  name?: string;
   imageUrl?: string;
 }
 export const Profile = ({ name, role, imageUrl }: ProfileProps) => {
   const { logout } = useAuth();
 
   const fallback = name
-    .split(" ")
-    .map((item, i, array) => (i === 0 || i == array.length - 1 ? item[0] : ""))
-    .join("");
+    ?.split(" ")
+    ?.map((item, i, array) => (i === 0 || i == array.length - 1 ? item[0] : ""))
+    ?.join("");
 
   return (
     <div className="flex items-center justify-between gap-5 rounded-xl border p-2.5 md:gap-10">

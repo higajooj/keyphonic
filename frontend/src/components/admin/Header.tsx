@@ -40,7 +40,7 @@ export const Header = ({ user }: HeaderProps) => {
               <MenuItem key={item.label} {...item} />
             ))}
           </div>
-          <Profile name={user.name} role="Administrador" />
+          <Profile name={user?.name} role="Administrador" />
         </div>
         <div className="ml-auto block lg:hidden">
           <Sheet>
@@ -54,7 +54,7 @@ export const Header = ({ user }: HeaderProps) => {
                     <MenuItem key={item.label} {...item} />
                   ))}
                 </div>
-                <Profile name={user.name} role="Administrador" />
+                <Profile name={user?.name} role="Administrador" />
               </div>
             </SheetContent>
           </Sheet>

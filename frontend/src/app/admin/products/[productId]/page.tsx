@@ -12,7 +12,7 @@ import ProductService from "@/services/ProductService";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import { CircleChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { newProductSchema, NewProductType } from "../new/page";
@@ -22,6 +22,8 @@ export default function Page() {
   const params = useParams();
   const productId = (params.productId || "") as string;
   const { product } = useProduct(productId);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
 
   const {
     register,
@@ -35,8 +37,9 @@ export default function Page() {
     if (product) {
       reset({
         ...product,
-        price: formatMoney(product.price) as unknown as number
+        price: formatMoney(product.price) as unknown as number,
       });
+      setPreviews(product.galery || []);
     }
   }, [product, reset]);
 
@@ -44,6 +47,15 @@ export default function Page() {
     console.log(data);
     try {
       await ProductService.updateProduct(productId, data);
+
+      if (files.length > 0) {
+        await Promise.all(
+          files.map((file) =>
+            ProductService.uploadProductPhoto(productId, file),
+          ),
+        );
+      }
+
       toast.success("Produto atualizado com sucesso!");
       back();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -125,7 +137,16 @@ export default function Page() {
           />
         </div>
 
-        <UploadImg name="image" label="Miniatura" />
+        <UploadImg
+          name="image"
+          label="Galeria"
+          files={files}
+          previews={previews}
+          onFilesChange={setFiles}
+          onPreviewRemove={(index) =>
+            setPreviews((prev) => prev.filter((_, i) => i !== index))
+          }
+        />
 
         <div className="mt-8 flex justify-end gap-4 lg:col-span-2">
           <Button

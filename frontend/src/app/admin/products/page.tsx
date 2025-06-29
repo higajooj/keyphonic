@@ -4,7 +4,7 @@ import { DataTable } from "@/components/admin/DataTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useProducts } from "@/hooks/useProducts";
-import { Filter, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { columns } from "./columns";
@@ -23,10 +23,10 @@ const ProductsPage = () => {
         />
 
         <div className="space-x-2">
-          <Button className="text-xs font-semibold" size="sm" variant="outline">
+          {/* <Button className="text-xs font-semibold" size="sm" variant="outline">
             <Filter />
             Filtrar
-          </Button>
+          </Button> */}
           <Link href={"products/new"}>
             <Button className="text-xs font-semibold" size="sm">
               <PlusCircle />

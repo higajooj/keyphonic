@@ -3,7 +3,7 @@
 import { localStorageKeys } from "@/config/localStorageKeys";
 import AuthService from "@/services/AuthService";
 import { useRouter } from "next/navigation";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 interface LoginInput {
   email: string;
@@ -24,27 +24,32 @@ interface AuthContextType {
   login: (input: LoginInput) => Promise<void>;
   signUp: (input: SignUpInput) => Promise<void>;
   isAuthenticated: boolean;
-  user: UserType | null;
+  user?: UserType | null;
 }
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { push } = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [user, setUser] = useState<UserType | null | undefined>(undefined);
 
-    return !!accessToken;
-  });
-  const [user, setUser] = useState<UserType | null>(() => {
+  useEffect(() => {
+    const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
     const stringUser = localStorage.getItem(localStorageKeys.USER);
 
-    if (!stringUser) return null;
-
-    const user = JSON.parse(stringUser);
-
-    return user;
-  });
+    if (accessToken && stringUser) {
+      try {
+        const parsedUser = JSON.parse(stringUser);
+        setUser(parsedUser);
+        setIsAuthenticated(true);
+      } catch (e) {
+        console.error("Erro ao fazer parse do user no localStorage:", e);
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    }
+  }, []);
 
   const handleStates = (data: { accessToken: string; user: UserType }) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, data.accessToken);
