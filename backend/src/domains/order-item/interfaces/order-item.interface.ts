@@ -1,4 +1,4 @@
-import { Prisma, OrderItem } from "generated/prisma";
+import { OrderItem, Prisma } from "generated/prisma";
 import { IPrismaRepository } from "src/domains/abstration/repository/prisma/IRepository";
 
 export abstract class IOrderItemRepository extends IPrismaRepository<

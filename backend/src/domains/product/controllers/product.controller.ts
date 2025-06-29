@@ -11,19 +11,19 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateService } from '../use-case/create.service';
-import { CreateProductBody } from './dto/create-product.dto';
-import { IdParams } from 'src/shared/dto/id-param.dto';
-import { GetOneService } from '../use-case/get-one.service';
-import { GetAllProductsRequestDTO } from './dto/get-all-products.dto';
-import { GetAllService } from '../use-case/get-all.service';
-import { UpdateService } from '../use-case/update.service';
-import { UpdateProductBody } from './dto/update-product.dto';
-import { DeleteService } from '../use-case/delete.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { imageFileFilter } from 'src/shared/utils/image-upload-utils';
-import { UploadService } from '../use-case/upload.service';
 import { AllowPublicAccess } from 'src/shared/decorators/allow-public-access.decorator';
+import { IdParams } from 'src/shared/dto/id-param.dto';
+import { imageFileFilter } from 'src/shared/utils/image-upload-utils';
+import { CreateService } from '../use-case/create.service';
+import { DeleteService } from '../use-case/delete.service';
+import { GetAllService } from '../use-case/get-all.service';
+import { GetOneService } from '../use-case/get-one.service';
+import { UpdateService } from '../use-case/update.service';
+import { UploadService } from '../use-case/upload.service';
+import { CreateProductBody } from './dto/create-product.dto';
+import { GetAllProductsRequestDTO } from './dto/get-all-products.dto';
+import { UpdateProductBody } from './dto/update-product.dto';
 
 @Controller('product')
 export class ProductController {

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { AggregateBaseArgs, IPrismaRepository } from "./IRepository";
 import { PrismaService } from "src/shared/infra/prisma/prisma.service";
+import { AggregateBaseArgs, IPrismaRepository } from "./IRepository";
 
 @Injectable()
 export abstract class PrismaRepository<FindFirstArgsBase, WhereUniqueInput, CreateInput, UpdateInput, Model>

@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-
-import { BCryptGateway } from '../gateways/bcrypt.gateway';
 import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
+import { BCryptGateway } from '../gateways/bcrypt.gateway';
 
 @Injectable()
 export class CryptographyProvider {

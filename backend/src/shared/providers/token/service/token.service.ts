@@ -1,7 +1,7 @@
-import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
 import { Inject, Injectable } from '@nestjs/common';
-import { ITokenProvider } from '../interface/ITokenProvider';
+import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
 import { JWTGateway } from '../gateways/jwt.gateway';
+import { ITokenProvider } from '../interface/ITokenProvider';
 import { DecodeInput, DecodeOutput } from '../types/decode';
 import { SingInput } from '../types/sing';
 

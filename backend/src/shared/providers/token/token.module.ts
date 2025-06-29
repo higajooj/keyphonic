@@ -1,8 +1,7 @@
 import { Module } from "@nestjs/common";
-
+import { JWTGateway } from "./gateways/jwt.gateway";
 import { ITokenProvider } from "./interface/ITokenProvider";
 import { TokenProvider } from "./service/token.service";
-import { JWTGateway } from "./gateways/jwt.gateway";
 
 @Module({
   providers: [{ provide: ITokenProvider, useClass: TokenProvider }, JWTGateway],

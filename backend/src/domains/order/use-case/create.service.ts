@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { OrderDomain, IOrder } from "../order.domain";
-import { IOrderRepository } from "../interfaces/order.interface";
 import { PaymentMethodEnum } from "generated/prisma";
+import { IOrderItemRepository } from "src/domains/order-item/interfaces/order-item.interface";
 import { IProductRepository } from "src/domains/product/interfaces/product.interface";
 import { IProduct, ProductDomain } from "src/domains/product/product.domain";
-import { IOrderItemRepository } from "src/domains/order-item/interfaces/order-item.interface";
+import { IOrderRepository } from "../interfaces/order.interface";
+import { IOrder, OrderDomain } from "../order.domain";
 
 export type ItemsInput = { productId: string; quantity: number };
 

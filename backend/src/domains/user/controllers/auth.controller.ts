@@ -1,10 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AllowPublicAccess } from 'src/shared/decorators/allow-public-access.decorator';
 import { LoginService } from '../use-case/login.service';
-import { LoginDTO, LoginResponseDTO } from './dto/login.dto';
-
-
 import { RegisterService } from '../use-case/register.service';
+import { LoginDTO, LoginResponseDTO } from './dto/login.dto';
 import { RegisterDTO, RegisterResponseDTO } from './dto/register.dto';
 
 @Controller('auth')

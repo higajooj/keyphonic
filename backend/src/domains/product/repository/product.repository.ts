@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { Prisma, Product } from "generated/prisma";
 import { PrismaRepository } from "src/domains/abstration/repository/prisma/Repository";
 import { PrismaService } from "src/shared/infra/prisma/prisma.service";
-import { Prisma, Product } from "generated/prisma";
 import { IProductRepository } from "../interfaces/product.interface";
 
 @Injectable()

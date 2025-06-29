@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { IProductRepository } from "../interfaces/product.interface";
+import { randomUUID } from "crypto";
 import * as fs from "fs";
 import * as path from "path";
-import { randomUUID } from "crypto";
+import { IProductRepository } from "../interfaces/product.interface";
 
 export type UploadServiceInput = {
   productId: string;

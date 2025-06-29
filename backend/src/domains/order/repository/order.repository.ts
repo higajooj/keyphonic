@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { Order, Prisma } from "generated/prisma";
 import { PrismaRepository } from "src/domains/abstration/repository/prisma/Repository";
 import { PrismaService } from "src/shared/infra/prisma/prisma.service";
-import { Prisma, Order } from "generated/prisma";
 import { IOrderRepository } from "../interfaces/order.interface";
 
 @Injectable()

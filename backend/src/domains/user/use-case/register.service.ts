@@ -1,10 +1,9 @@
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
-
-import { IUserRepository } from '../interfaces/user.interface';
-import { LoginService, LoginServiceOutput } from './login.service';
 import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
-import { UserDomain } from '../user.domain';
 import { ICryptographyProvider } from 'src/shared/providers/cryptography';
+import { IUserRepository } from '../interfaces/user.interface';
+import { UserDomain } from '../user.domain';
+import { LoginService, LoginServiceOutput } from './login.service';
 
 export type RegisterServiceInput = {
   name: string;

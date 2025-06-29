@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { CategoryEnum } from "generated/prisma";
-import { IProductRepository } from "../interfaces/product.interface";
 import { BasePaginationInputDTO, BasePaginationOutputDTO } from "src/shared/dto/pagination.dto";
-import { IProduct } from "../product.domain";
 import { makePagination } from "src/shared/utils/make-pagination";
+import { IProductRepository } from "../interfaces/product.interface";
+import { IProduct } from "../product.domain";
 
 export class GetAllServiceInput extends BasePaginationInputDTO {
   filter?: {

@@ -1,10 +1,9 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { sign as _sign, verify } from 'jsonwebtoken';
-
 import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
 import { ITokenProvider } from '../interface/ITokenProvider';
 import { DecodeInput, DecodeOutput } from '../types/decode';
 import { SingInput, SingOutput } from '../types/sing';
-import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class JWTGateway implements ITokenProvider {

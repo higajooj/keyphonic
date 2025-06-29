@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { IOrder } from "../order.domain";
 import { IOrderRepository } from "../interfaces/order.interface";
+import { IOrder } from "../order.domain";
 
 export type GetOneOrderServiceInput = {
   id: string;

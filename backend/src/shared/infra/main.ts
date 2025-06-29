@@ -1,9 +1,9 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import { json, urlencoded } from "body-parser";
 import * as path from "path";
-import { NestExpressApplication } from "@nestjs/platform-express";
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
   NestFactory.create<NestExpressApplication>(AppModule, { cors: true }).then(async (app) => {

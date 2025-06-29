@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { APP_GUARD } from "@nestjs/core";
+import { EnvironmentVariables, EnvironmentVariablesSchema } from "src/config/env";
+import { JwtGuard } from "../guards/jwt.guard";
+import { JwtStrategy } from "../strategies/jwt.strategy";
 import { modules } from "./modules";
 import { providers } from "./providers";
-import { ConfigModule } from "@nestjs/config";
-import { EnvironmentVariables, EnvironmentVariablesSchema } from "src/config/env";
-import { JwtStrategy } from "../strategies/jwt.strategy";
-import { APP_GUARD } from "@nestjs/core";
-import { JwtGuard } from "../guards/jwt.guard";
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { format, startOfMonth, subMonths } from "date-fns";
 import { PaymentMethodEnum } from "generated/prisma";
 import { IOrderRepository } from "../interfaces/order.interface";
-import { subMonths, startOfMonth, format } from "date-fns";
 
 export class GetStatsServiceInput {
   filter?: {
