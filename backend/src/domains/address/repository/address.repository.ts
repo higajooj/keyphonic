@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaRepository } from 'src/domains/abstration/repository/prisma/Repository';
-import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
-import { Prisma, Address } from 'generated/prisma';
-import { IAddressRepository } from '../interfaces/address.interface';
+import { Injectable } from "@nestjs/common";
+import { PrismaRepository } from "src/domains/abstration/repository/prisma/Repository";
+import { PrismaService } from "src/shared/infra/prisma/prisma.service";
+import { Prisma, Address } from "generated/prisma";
+import { IAddressRepository } from "../interfaces/address.interface";
 
 @Injectable()
 export class AddressRepository
@@ -16,6 +16,6 @@ export class AddressRepository
   implements IAddressRepository
 {
   constructor(private readonly repository: PrismaService) {
-    super('address', repository);
+    super("address", repository);
   }
 }

@@ -1,6 +1,6 @@
-import { registerAs } from '@nestjs/config';
+import { registerAs } from "@nestjs/config";
 
-export const EnvironmentVariables = registerAs('config', () => {
+export const EnvironmentVariables = registerAs("config", () => {
   return {
     environment: process.env.NODE_ENV,
     app: {

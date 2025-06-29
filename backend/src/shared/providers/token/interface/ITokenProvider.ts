@@ -1,5 +1,5 @@
-import { DecodeInput, DecodeOutput } from '../types/decode';
-import { SingInput, SingOutput } from '../types/sing';
+import { DecodeInput, DecodeOutput } from "../types/decode";
+import { SingInput, SingOutput } from "../types/sing";
 
 export abstract class ITokenProvider {
   abstract sign(data: SingInput): Promise<SingOutput>;

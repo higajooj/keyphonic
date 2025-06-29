@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { IProductRepository } from '../interfaces/product.interface';
-import * as fs from 'fs';
-import * as path from 'path';
-import { randomUUID } from 'crypto';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { IProductRepository } from "../interfaces/product.interface";
+import * as fs from "fs";
+import * as path from "path";
+import { randomUUID } from "crypto";
 
 export type UploadServiceInput = {
   productId: string;
@@ -13,24 +13,17 @@ export type UploadServiceOutput = { url: string };
 
 @Injectable()
 export class UploadService {
-  private readonly uploadFolder = path.resolve(
-    __dirname,
-    '../../../../uploads/products',
-  );
+  private readonly uploadFolder = path.resolve(__dirname, "../../../../uploads/products");
 
   constructor(private readonly productRepository: IProductRepository) {}
 
-  public async execute(
-    input: UploadServiceInput,
-  ): Promise<UploadServiceOutput> {
+  public async execute(input: UploadServiceInput): Promise<UploadServiceOutput> {
     const product = await this.productRepository.findByUnique({
       id: input.productId,
     });
 
     if (!product) {
-      throw new NotFoundException(
-        `Produto com id ${input.productId} não encontrado`,
-      );
+      throw new NotFoundException(`Produto com id ${input.productId} não encontrado`);
     }
 
     if (!fs.existsSync(this.uploadFolder)) {
@@ -45,10 +38,7 @@ export class UploadService {
 
     const imageUrl = `/uploads/products/${filename}`;
 
-    await this.productRepository.update(
-      { id: product.id },
-      { galery: { push: imageUrl } },
-    );
+    await this.productRepository.update({ id: product.id }, { galery: { push: imageUrl } });
 
     return { url: imageUrl };
   }

@@ -1,10 +1,8 @@
-import { BadRequestException } from '@nestjs/common';
-import { PaymentMethodEnum } from 'generated/prisma';
-import BaseDomain, {
-  BaseDomainInterface,
-} from 'src/shared/domain/base-domain.domain';
-import { IProduct } from '../product/product.domain';
-import { ItemsInput } from './use-case/create.service';
+import { BadRequestException } from "@nestjs/common";
+import { PaymentMethodEnum } from "generated/prisma";
+import BaseDomain, { BaseDomainInterface } from "src/shared/domain/base-domain.domain";
+import { IProduct } from "../product/product.domain";
+import { ItemsInput } from "./use-case/create.service";
 
 export type IOrder = {
   id: string;
@@ -27,7 +25,7 @@ type CreateOrderInput = {
   qtd?: number;
 } & BaseDomainInterface;
 
-type UpdateOrderInput = Partial<Pick<IOrder, 'paymentMethod'>>;
+type UpdateOrderInput = Partial<Pick<IOrder, "paymentMethod">>;
 export class OrderDomain extends BaseDomain {
   paymentMethod: PaymentMethodEnum;
   delivery_fee: number;
@@ -57,7 +55,7 @@ export class OrderDomain extends BaseDomain {
     if (input.id) return;
 
     if (!input.paymentMethod) {
-      throw new BadRequestException('paymentMethod is required');
+      throw new BadRequestException("paymentMethod is required");
     }
   }
 
@@ -84,8 +82,7 @@ export class OrderDomain extends BaseDomain {
   }
 
   calculateOrderTotal(products: IProduct[], items: ItemsInput[]) {
-    this.total =
-      this.calculateProductsTotal(products, items) + this.delivery_fee;
+    this.total = this.calculateProductsTotal(products, items) + this.delivery_fee;
   }
 
   calculateProductsQtd(products: IProduct[], items: ItemsInput[]) {

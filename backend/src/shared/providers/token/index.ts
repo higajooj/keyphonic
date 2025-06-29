@@ -1,2 +1,2 @@
-export * from './interface/ITokenProvider';
-export * from './token.module';
+export * from "./interface/ITokenProvider";
+export * from "./token.module";

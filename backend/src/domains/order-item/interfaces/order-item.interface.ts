@@ -1,5 +1,5 @@
-import { Prisma, OrderItem } from 'generated/prisma';
-import { IPrismaRepository } from 'src/domains/abstration/repository/prisma/IRepository';
+import { Prisma, OrderItem } from "generated/prisma";
+import { IPrismaRepository } from "src/domains/abstration/repository/prisma/IRepository";
 
 export abstract class IOrderItemRepository extends IPrismaRepository<
   Prisma.OrderItemFindFirstArgs,
@@ -8,7 +8,5 @@ export abstract class IOrderItemRepository extends IPrismaRepository<
   Prisma.OrderItemUpdateInput,
   OrderItem
 > {
-  abstract createMany(
-    data?: Prisma.OrderItemCreateManyInput | Prisma.OrderItemCreateManyInput[],
-  ): Promise<OrderItem[]>;
+  abstract createMany(data?: Prisma.OrderItemCreateManyInput | Prisma.OrderItemCreateManyInput[]): Promise<OrderItem[]>;
 }

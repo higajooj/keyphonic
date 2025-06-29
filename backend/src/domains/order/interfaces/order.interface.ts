@@ -1,5 +1,5 @@
-import { Prisma, Order } from 'generated/prisma';
-import { IPrismaRepository } from 'src/domains/abstration/repository/prisma/IRepository';
+import { Prisma, Order } from "generated/prisma";
+import { IPrismaRepository } from "src/domains/abstration/repository/prisma/IRepository";
 
 export abstract class IOrderRepository extends IPrismaRepository<
   Prisma.OrderFindFirstArgs,
@@ -8,8 +8,5 @@ export abstract class IOrderRepository extends IPrismaRepository<
   Prisma.OrderUpdateInput,
   Order
 > {
-  abstract findByUnique(
-    unique: Prisma.OrderWhereUniqueInput,
-    include?: Prisma.OrderInclude,
-  ): Promise<Order | void>;
+  abstract findByUnique(unique: Prisma.OrderWhereUniqueInput, include?: Prisma.OrderInclude): Promise<Order | void>;
 }

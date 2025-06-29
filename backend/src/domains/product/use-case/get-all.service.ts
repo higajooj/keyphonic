@@ -1,12 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { CategoryEnum } from 'generated/prisma';
-import { IProductRepository } from '../interfaces/product.interface';
-import {
-  BasePaginationInputDTO,
-  BasePaginationOutputDTO,
-} from 'src/shared/dto/pagination.dto';
-import { IProduct } from '../product.domain';
-import { makePagination } from 'src/shared/utils/make-pagination';
+import { Injectable } from "@nestjs/common";
+import { CategoryEnum } from "generated/prisma";
+import { IProductRepository } from "../interfaces/product.interface";
+import { BasePaginationInputDTO, BasePaginationOutputDTO } from "src/shared/dto/pagination.dto";
+import { IProduct } from "../product.domain";
+import { makePagination } from "src/shared/utils/make-pagination";
 
 export class GetAllServiceInput extends BasePaginationInputDTO {
   filter?: {
@@ -23,17 +20,14 @@ export class GetAllServiceOutput extends BasePaginationOutputDTO {
 export class GetAllService {
   constructor(private readonly productRepository: IProductRepository) {}
 
-  public async execute({
-    filter,
-    pagination,
-  }: GetAllServiceInput): Promise<GetAllServiceOutput> {
+  public async execute({ filter, pagination }: GetAllServiceInput): Promise<GetAllServiceOutput> {
     const where: any = { isActive: true };
 
     if (filter?.category) where.category = filter.category;
     if (filter?.search) {
       where.OR = [
-        { name: { contains: filter.search, mode: 'insensitive' } },
-        { description: { contains: filter.search, mode: 'insensitive' } },
+        { name: { contains: filter.search, mode: "insensitive" } },
+        { description: { contains: filter.search, mode: "insensitive" } },
       ];
     }
 

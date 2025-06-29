@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { PaymentMethodEnum } from 'generated/prisma';
-import { IOrderRepository } from '../interfaces/order.interface';
-import { subMonths, startOfMonth, format } from 'date-fns';
+import { Injectable } from "@nestjs/common";
+import { PaymentMethodEnum } from "generated/prisma";
+import { IOrderRepository } from "../interfaces/order.interface";
+import { subMonths, startOfMonth, format } from "date-fns";
 
 export class GetStatsServiceInput {
   filter?: {
@@ -30,9 +30,7 @@ export class GetStatsServiceOutput {
 export class GetStatsService {
   constructor(private readonly orderRepository: IOrderRepository) {}
 
-  public async execute({
-    filter,
-  }: GetStatsServiceInput): Promise<GetStatsServiceOutput> {
+  public async execute({ filter }: GetStatsServiceInput): Promise<GetStatsServiceOutput> {
     const now = new Date();
     const startDate = subMonths(startOfMonth(now), 11);
 
@@ -51,21 +49,18 @@ export class GetStatsService {
     const monthsMap = new Map<string, number>();
     for (let i = 11; i >= 0; i--) {
       const date = subMonths(now, i);
-      const key = format(date, 'MMMM');
+      const key = format(date, "MMMM");
       monthsMap.set(key, 0);
     }
 
-    const statusMap: Record<
-      string,
-      { label: string; value: number; count: number }
-    > = {
-      COMPLETED: { label: 'Pagos', value: 0, count: 0 },
-      PENDING: { label: 'Em andamentos', value: 0, count: 0 },
-      REFUSED: { label: 'Cancelados', value: 0, count: 0 },
+    const statusMap: Record<string, { label: string; value: number; count: number }> = {
+      COMPLETED: { label: "Pagos", value: 0, count: 0 },
+      PENDING: { label: "Em andamentos", value: 0, count: 0 },
+      REFUSED: { label: "Cancelados", value: 0, count: 0 },
     };
 
     for (const order of orders) {
-      const month = format(order.createdAt, 'MMMM');
+      const month = format(order.createdAt, "MMMM");
       if (monthsMap.has(month)) {
         monthsMap.set(month, monthsMap.get(month)! + order.total);
       }

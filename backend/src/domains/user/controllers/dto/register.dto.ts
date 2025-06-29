@@ -1,8 +1,7 @@
-import { IsEmail, IsString } from 'class-validator';
-import { LoginResponseDTO } from './login.dto';
+import { IsEmail, IsString } from "class-validator";
+import { LoginResponseDTO } from "./login.dto";
 
 export class RegisterDTO {
-
   @IsString()
   name: string;
 

@@ -1,5 +1,5 @@
-import { BadRequestException } from '@nestjs/common';
-import BaseDomain, { BaseDomainInterface } from 'src/shared/domain/base-domain.domain';
+import { BadRequestException } from "@nestjs/common";
+import BaseDomain, { BaseDomainInterface } from "src/shared/domain/base-domain.domain";
 
 type CreateUserInput = {
   name: string;
@@ -7,9 +7,9 @@ type CreateUserInput = {
   email: string;
 
   isActive?: boolean;
-} & BaseDomainInterface ;
+} & BaseDomainInterface;
 
-type UpdateUserInput = Partial<Pick<CreateUserInput, 'name' | 'email'>>;
+type UpdateUserInput = Partial<Pick<CreateUserInput, "name" | "email">>;
 export class UserDomain extends BaseDomain {
   name: string;
   password: string;
@@ -28,10 +28,7 @@ export class UserDomain extends BaseDomain {
   }
 
   update(input: UpdateUserInput) {
-    if (!this.isActive)
-      throw new BadRequestException(
-        'This user is not active, unable to update',
-      );
+    if (!this.isActive) throw new BadRequestException("This user is not active, unable to update");
 
     const payload = Object.assign({}, this);
     this._validate(Object.assign(payload, input));
@@ -46,19 +43,13 @@ export class UserDomain extends BaseDomain {
   }
   private _validate(input: CreateUserInput) {
     if (input.id) return;
-    if (
-      !input.email ||
-      !input.name ||
-      !input.password 
-    )
-      throw new BadRequestException(
-        'email, name and password are required fields',
-      );
+    if (!input.email || !input.name || !input.password)
+      throw new BadRequestException("email, name and password are required fields");
   }
 
   private _sanitize(input: CreateUserInput) {
     return {
-      name: input.name.trim().replace(/\s+/g, ' '),
+      name: input.name.trim().replace(/\s+/g, " "),
       password: input.password.trim(),
       email: input.email.trim().toLowerCase(),
       isActive: !!input.isActive,

@@ -1,7 +1,5 @@
-import { BadRequestException } from '@nestjs/common';
-import BaseDomain, {
-  BaseDomainInterface,
-} from 'src/shared/domain/base-domain.domain';
+import { BadRequestException } from "@nestjs/common";
+import BaseDomain, { BaseDomainInterface } from "src/shared/domain/base-domain.domain";
 
 export type IAddress = {
   id: string;
@@ -31,16 +29,7 @@ type CreateAddressInput = {
 } & BaseDomainInterface;
 
 type UpdateAddressInput = Partial<
-  Pick<
-    CreateAddressInput,
-    | 'street'
-    | 'number'
-    | 'neighborhood'
-    | 'zip_code'
-    | 'complement'
-    | 'city'
-    | 'state'
-  >
+  Pick<CreateAddressInput, "street" | "number" | "neighborhood" | "zip_code" | "complement" | "city" | "state">
 >;
 export class AddressDomain extends BaseDomain {
   street: string;
@@ -87,30 +76,19 @@ export class AddressDomain extends BaseDomain {
 
   private _validate(input: CreateAddressInput) {
     if (input.id) return;
-    if (
-      !input.city ||
-      !input.neighborhood ||
-      !input.number ||
-      !input.state ||
-      !input.street ||
-      !input.zip_code
-    )
-      throw new BadRequestException(
-        'neighborhood, city, number, street, zip code and state are required fields',
-      );
+    if (!input.city || !input.neighborhood || !input.number || !input.state || !input.street || !input.zip_code)
+      throw new BadRequestException("neighborhood, city, number, street, zip code and state are required fields");
   }
 
   private _sanitize(input: CreateAddressInput) {
     return {
-      street: input.street.trim().replace(/\s+/g, ' '),
-      number: input.number.trim().replace(/\s+/g, ' '),
-      neighborhood: input.neighborhood.trim().replace(/\s+/g, ' '),
-      zip_code: input.zip_code.trim().replace(/\D+/g, ''),
-      complement: input.complement
-        ? input.complement.trim().replace(/\s+/g, ' ')
-        : undefined,
-      city: input.city.trim().replace(/\s+/g, ' '),
-      state: input.state.trim().replace(/\s+/g, ' '),
+      street: input.street.trim().replace(/\s+/g, " "),
+      number: input.number.trim().replace(/\s+/g, " "),
+      neighborhood: input.neighborhood.trim().replace(/\s+/g, " "),
+      zip_code: input.zip_code.trim().replace(/\D+/g, ""),
+      complement: input.complement ? input.complement.trim().replace(/\s+/g, " ") : undefined,
+      city: input.city.trim().replace(/\s+/g, " "),
+      state: input.state.trim().replace(/\s+/g, " "),
       isActive: input.isActive !== undefined ? input.isActive : true,
     };
   }

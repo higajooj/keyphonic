@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { IOrder } from '../order.domain';
-import { IOrderRepository } from '../interfaces/order.interface';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { IOrder } from "../order.domain";
+import { IOrderRepository } from "../interfaces/order.interface";
 
 export type GetOneOrderServiceInput = {
   id: string;
@@ -12,9 +12,7 @@ export type GetOneOrderServiceOutput = IOrder;
 export class GetOneOrderService {
   constructor(private readonly orderRepository: IOrderRepository) {}
 
-  public async execute(
-    input: GetOneOrderServiceInput,
-  ): Promise<GetOneOrderServiceOutput> {
+  public async execute(input: GetOneOrderServiceInput): Promise<GetOneOrderServiceOutput> {
     const order = await this.orderRepository.findByUnique(
       // where
       {

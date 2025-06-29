@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { AddressDomain, IAddress } from '../address.domain';
-import { IAddressRepository } from '../interfaces/address.interface';
+import { Injectable } from "@nestjs/common";
+import { AddressDomain, IAddress } from "../address.domain";
+import { IAddressRepository } from "../interfaces/address.interface";
 
 export type CreateServiceInput = {
   street: string;
@@ -18,9 +18,7 @@ export type CreateServiceOutput = IAddress;
 export class CreateService {
   constructor(private readonly addressRepository: IAddressRepository) {}
 
-  public async execute(
-    input: CreateServiceInput,
-  ): Promise<CreateServiceOutput> {
+  public async execute(input: CreateServiceInput): Promise<CreateServiceOutput> {
     const domain = new AddressDomain(input);
     const product = await this.addressRepository.create({
       ...domain,
