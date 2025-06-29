@@ -1,3 +1,4 @@
+import { useOrder } from "@/hooks/useOrder";
 import { formatMoney } from "@/lib/utils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -17,53 +18,31 @@ interface SheetDetailOrderProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-const products = [
-  {
-    id: "asdjadjh",
-    name: "Keyboard xytz",
-    price: 150_00,
-    imgUrl:
-      "https://img.endgamegear.com/images/GATA-2601/f5ebb3e69354cb2ea4372d13f6c30894.jpg",
-    salesCount: 25,
-  },
-  {
-    id: "jiodfg",
-    name: "Phone xytz",
-    price: 50_00,
-    salesCount: 5,
-  },
-];
-
-const order = {
-  id: "728ed52f",
-  client: "Sarah Fernandez",
-  total: 200_00,
-  qty: 2,
-  status: "pending",
-  date: new Date("2025-02-14").toISOString(),
-};
 
 export const SheetDetailOrder = ({
   orderId,
   ...props
 }: SheetDetailOrderProps) => {
-  console.log("orderId:", orderId);
+  const { order } = useOrder(orderId);
+  if (!order || !orderId) return null;
+
   const orderInfos = [
     {
       label: "#Pedido",
-      value: `#${order.id}`,
+      value: `${order.id}`,
     },
     {
-      label: "Cliente",
-      value: order.client,
+      label: "Endereço de entrega",
+      value: `${order.address.street}, ${order.address.number}, ${order.address.neighborhood}
+      ${order.address.city}/${order.address.state}, CEP ${order.address.zip_code}`,
     },
     {
       label: "Data",
-      value: format(order.date, "eeeeee, dd MMM, HH:mm", { locale: ptBR }),
+      value: format(order.createdAt, "eeeeee, dd MMM, HH:mm", { locale: ptBR }),
     },
     {
       label: "Qtd. Items",
-      value: order.qty,
+      value: order.qtd,
     },
     {
       label: "Total",
@@ -88,9 +67,18 @@ export const SheetDetailOrder = ({
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-4">
-                  {products.map((p) => (
-                    <ProductCard key={p.id} {...p} />
-                  ))}
+                  {order.OrderItem.map((o) => {
+                    const p = o.product;
+                    return (
+                      <ProductCard
+                        key={o.id}
+                        name={p?.name || "produto não encotrado"}
+                        price={o.price}
+                        imgUrl={p?.galery?.[0]}
+                        salesCount={o.qtd}
+                      />
+                    );
+                  })}
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -104,7 +92,9 @@ export const SheetDetailOrder = ({
                     <div className="flex items-baseline gap-2" key={label}>
                       <p className="text-sm text-gray-500">{label}</p>
                       <div className="h-0 grow border border-dashed" />
-                      <p className="text-xs font-semibold">{value}</p>
+                      <span className="max-w-[238px] text-right text-xs font-semibold">
+                        {value}
+                      </span>
                     </div>
                   ))}
                 </div>

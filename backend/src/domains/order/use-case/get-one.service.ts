@@ -22,7 +22,11 @@ export class GetOneOrderService {
       },
       // include
       {
-        OrderItem: true,
+        OrderItem: {
+          include: {
+            product: true,
+          },
+        },
         address: true,
       },
     );

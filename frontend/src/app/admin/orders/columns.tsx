@@ -2,17 +2,9 @@
 
 import Status, { StatusEnum } from "@/components/admin/Status";
 import { formatMoney } from "@/lib/utils";
+import { Address, Order } from "@/services/OrderService/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-
-export type Order = {
-  id: string;
-  client: string;
-  status: "pending" | "completed" | "refused";
-  total: number;
-  qty: number;
-  date: string;
-};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -23,11 +15,17 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
-    accessorKey: "client",
-    header: () => <div className="text-center">Cliente</div>,
-    cell: (props) => (
-      <div className="text-center">{props.getValue<string>()}</div>
-    ),
+    accessorKey: "address",
+    header: () => <div className="text-center">Endereço de entrega</div>,
+    cell: (props) => {
+      const { city, state } = props.getValue() as Address;
+
+      return (
+        <div className="text-center">
+          {city} / {state}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "total",
@@ -37,7 +35,7 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
-    accessorKey: "qty",
+    accessorKey: "qtd",
     header: () => <div className="text-center">qtd. Items</div>,
     cell: (props) => (
       <div className="text-center">{props.getValue<string>()}</div>
@@ -49,7 +47,7 @@ export const columns: ColumnDef<Order>[] = [
     cell: (props) => <Status status={props.getValue<StatusEnum>()} />,
   },
   {
-    accessorKey: "date",
+    accessorKey: "createdAt",
     header: () => <div className="text-center">Data</div>,
     cell: (props) => (
       <div className="text-center">

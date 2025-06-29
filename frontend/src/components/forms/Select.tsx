@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   SelectContent,
   SelectItem,
@@ -14,27 +15,41 @@ interface SelectProps {
   error?: string;
   onChange?: (value: string) => void;
   id?: string;
+  defaultValue?: string;
 }
 export const Select = ({
   label,
   error,
   options,
   onChange,
+  defaultValue,
   ...props
 }: SelectProps) => {
+  const [value, setValue] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, [defaultValue]);
   const id = props.id || props.name;
   return (
     <div className="space-y-1">
       <label className="mb-1.5 text-xs" htmlFor={id}>
         {label}
       </label>
-      <UISelect onValueChange={(value) => onChange && onChange(value)}>
+      <UISelect
+        onValueChange={(v) => {
+          setValue(v);
+          if (onChange) onChange(v);
+        }}
+        value={value}
+      >
         <SelectTrigger id={id} className="w-full">
           <SelectValue placeholder={props.placeholder} />
         </SelectTrigger>
         <SelectContent>
           {options.map(({ value, label }) => (
-            <SelectItem value={value}>{label}</SelectItem>
+            <SelectItem key={value} value={value}>
+              {label}
+            </SelectItem>
           ))}
         </SelectContent>
       </UISelect>

@@ -1,12 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
 
 const loginFormSchema = z.object({
   email: z.string().email("e-mail inválido"),
@@ -23,18 +24,18 @@ export default function LoginPage() {
   } = useForm<loginFormType>({
     resolver: zodResolver(loginFormSchema),
   });
+  const { login } = useAuth();
 
   const onSubmit = async (formValues: loginFormType) => {
-    const { data, error } = await authClient.signIn.email(
-      {
-        email: formValues.email,
-        password: formValues.password,
-        rememberMe: true,
-      },
-      {
-        //callbacks
-      },
-    );
+    try {
+      await login(formValues);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(
+        error.message || "Houve um erro ao logar. Tente novamente mais tarde",
+      );
+    }
   };
 
   return (
@@ -43,11 +44,20 @@ export default function LoginPage() {
         className="m-8 flex w-full max-w-[495px] flex-col rounded-xl bg-[#F7F7F7] p-8"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className="mb-8 text-center font-bold text-3xl">KeyPhonic</h1>
+        <h1 className="mb-8 text-center text-3xl font-bold">KeyPhonic</h1>
 
         <div className="mb-5 space-y-2.5">
-          <Input label="E-mail" {...register("email")} error={errors.email?.message} />
-          <Input label="Senha" type="password" {...register("password")} error={errors.password?.message} />
+          <Input
+            label="E-mail"
+            {...register("email")}
+            error={errors.email?.message}
+          />
+          <Input
+            label="Senha"
+            type="password"
+            {...register("password")}
+            error={errors.password?.message}
+          />
         </div>
 
         <Button type="submit">Entrar</Button>

@@ -5,9 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatMoney = (value?: number) => {
+export const formatMoney = (value?: number | string) => {
   if (value) {
     const string = value.toString();
+    const number = Number(value)
 
     if (string.replace(/\D/g, "") !== "") {
       const amount = (
@@ -18,7 +19,7 @@ export const formatMoney = (value?: number) => {
         currency: "BRL",
       });
 
-      return value < 0 ? `-${amount}` : amount;
+      return number < 0 ? `-${amount}` : amount;
     }
   }
 

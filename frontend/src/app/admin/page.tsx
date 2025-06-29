@@ -1,3 +1,13 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function Page() {
-  return <>admin page</>;
+  const { replace } = useRouter();
+
+  useEffect(() => {
+    replace("admin/orders");
+  }, [replace]);
+
+  return null;
 }

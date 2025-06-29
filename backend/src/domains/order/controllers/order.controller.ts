@@ -8,6 +8,7 @@ import { UpdateOrderService } from '../use-case/update.service';
 import { GetAllOrderService } from '../use-case/get-all.service';
 import { GetAllOrdersRequestDTO } from './dto/get-all-order.dto';
 import { AllowPublicAccess } from 'src/shared/decorators/allow-public-access.decorator';
+import { GetStatsService } from '../use-case/get-stats.service';
 
 @Controller('order')
 export class OrderController {
@@ -16,6 +17,7 @@ export class OrderController {
     private readonly getOneService: GetOneOrderService,
     private readonly getAllService: GetAllOrderService,
     private readonly updateService: UpdateOrderService,
+    private readonly getStatsService: GetStatsService,
   ) {}
 
   @Post('')
@@ -39,6 +41,11 @@ export class OrderController {
     };
 
     return this.getAllService.execute({ filter, pagination });
+  }
+
+  @Get('/stats')
+  getChart() {
+    return this.getStatsService.execute({});
   }
 
   @Get(':id')

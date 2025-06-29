@@ -47,7 +47,7 @@ export function OrdersChart({ chartConfig, chartData }: OrdersChartProps) {
         <Bar
           activeBar={{ fill: "var(--color-value)" }}
           dataKey="value"
-          fill={"#E5E5E5"}
+          fill={"#008fcc90"}
           radius={8}
         />
       </BarChart>
