@@ -1,12 +1,12 @@
 "use client";
 
+import { PlusCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DataTable } from "@/components/admin/DataTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useProducts } from "@/hooks/useProducts";
-import { PlusCircle } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { columns } from "./columns";
 
 const ProductsPage = () => {
@@ -17,9 +17,9 @@ const ProductsPage = () => {
       <div className="flex justify-between">
         <Input
           name="search"
+          onChange={(e) => handleSearch(e.currentTarget.value)}
           placeholder="Pesquisar"
           variant="search"
-          onChange={(e) => handleSearch(e.currentTarget.value)}
         />
 
         <div className="space-x-2">

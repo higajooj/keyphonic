@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { Product } from "@/entities/Product";
 import ProductService from "@/services/ProductService";
 import { GetProductsParams } from "@/services/ProductService/types";
-import { useEffect, useState } from "react";
 
 export const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);

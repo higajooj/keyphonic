@@ -1,5 +1,12 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
+import { CircleChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
 import { Select } from "@/components/forms/Select";
 import { UploadImg } from "@/components/forms/uploadImg";
 import { Button } from "@/components/ui/button";
@@ -8,13 +15,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { ProductCategory, ProductCategoryValues } from "@/entities/Product";
 import { formatMoney } from "@/lib/utils";
 import ProductService from "@/services/ProductService";
-import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
-import { CircleChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { z } from "zod";
 
 export const newProductSchema = z.object({
   id: z.string().optional(),
@@ -86,8 +86,8 @@ const NewProductPage = () => {
             <Input
               error={errors.price?.message}
               label="Valor"
-              placeholder="R$ 450,00"
               mask={formatMoney}
+              placeholder="R$ 450,00"
               {...register("price")}
             />
 
@@ -108,12 +108,12 @@ const NewProductPage = () => {
         </div>
 
         <UploadImg
+          files={images}
           label="Galeria"
           name="image"
-          files={images}
           onFilesChange={setImages}
-          previews={[]}
           onPreviewRemove={() => {}}
+          previews={[]}
         />
 
         <div className="mt-8 flex justify-end gap-4 lg:col-span-2">

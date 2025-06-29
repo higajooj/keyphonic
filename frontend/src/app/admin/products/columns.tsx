@@ -1,10 +1,10 @@
 "use client";
 
+import { ColumnDef } from "@tanstack/react-table";
 import { Pill } from "@/components/admin/Pill";
 import Status, { StatusEnum } from "@/components/admin/Status";
 import { Product } from "@/entities/Product";
 import { formatMoney } from "@/lib/utils";
-import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<Product>[] = [
   {

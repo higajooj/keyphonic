@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import OrderService from "@/services/OrderService";
 import { ChartItem, StatisticItem } from "@/services/OrderService/types";
-import { useEffect, useState } from "react";
 
 export const useOrdersStats = () => {
   const [chartData, setChartData] = useState<ChartItem[]>([]);

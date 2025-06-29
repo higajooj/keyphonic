@@ -1,7 +1,6 @@
-import Link from "next/link";
-
-import { useAuth } from "@/hooks/useAuth";
 import { LogOut } from "lucide-react";
+import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface ProfileProps {

@@ -29,7 +29,7 @@ export const Select = ({ label, error, options, onChange, defaultValue, ...props
         }}
         value={value}
       >
-        <SelectTrigger id={id} className="w-full">
+        <SelectTrigger className="w-full" id={id}>
           <SelectValue placeholder={props.placeholder} />
         </SelectTrigger>
         <SelectContent>

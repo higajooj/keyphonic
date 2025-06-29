@@ -1,7 +1,7 @@
-import { useOrder } from "@/hooks/useOrder";
-import { formatMoney } from "@/lib/utils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useOrder } from "@/hooks/useOrder";
+import { formatMoney } from "@/lib/utils";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { ProductCard } from "./ProductCard";
@@ -51,7 +51,7 @@ export const SheetDetailOrder = ({ orderId, ...props }: SheetDetailOrderProps) =
           <SheetTitle>Detalhes do Pedido</SheetTitle>
         </SheetHeader>
         <div className="px-4">
-          <Accordion type="multiple" defaultValue={["products", "order-info"]}>
+          <Accordion defaultValue={["products", "order-info"]} type="multiple">
             <AccordionItem value="products">
               <AccordionTrigger className="font-semibold">Produtos</AccordionTrigger>
               <AccordionContent>
@@ -60,10 +60,10 @@ export const SheetDetailOrder = ({ orderId, ...props }: SheetDetailOrderProps) =
                     const p = o.product;
                     return (
                       <ProductCard
+                        imgUrl={p?.galery?.[0]}
                         key={o.id}
                         name={p?.name || "produto não encotrado"}
                         price={o.price}
-                        imgUrl={p?.galery?.[0]}
                         salesCount={o.qtd}
                       />
                     );

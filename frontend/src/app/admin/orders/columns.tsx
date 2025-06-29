@@ -1,10 +1,10 @@
 "use client";
 
+import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 import Status, { StatusEnum } from "@/components/admin/Status";
 import { formatMoney } from "@/lib/utils";
 import { Address, Order } from "@/services/OrderService/types";
-import { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 
 export const columns: ColumnDef<Order>[] = [
   {

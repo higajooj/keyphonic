@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import { ClassNameValue } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 interface PillProps {
   children: ReactNode;

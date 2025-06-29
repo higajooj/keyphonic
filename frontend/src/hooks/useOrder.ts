@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { Order } from "@/entities/Order";
 import OrderService from "@/services/OrderService";
-import { useEffect, useState } from "react";
 
 export const useOrder = (id: string) => {
   const [order, setOrder] = useState<Order | null>(null);

@@ -1,9 +1,9 @@
 "use client";
 
-import { Header } from "@/components/admin/Header";
-import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Header } from "@/components/admin/Header";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { replace } = useRouter();

@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Trash2, UploadCloud } from "lucide-react";
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface UploadImgProps {
   name: string;
@@ -37,20 +37,20 @@ export const UploadImg = ({ name, label, files, onFilesChange, onPreviewRemove, 
           {/* imagens já existentes */}
           {previews &&
             previews.map((url, index) => (
-              <div key={`preview-${index}`} className="group relative h-24 w-24">
+              <div className="group relative h-24 w-24" key={`preview-${index}`}>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`}
                   alt="Preview"
-                  width={96}
-                  height={96}
                   className="h-full w-full rounded-lg object-cover"
+                  height={96}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`}
                   style={{ objectFit: "cover" }}
+                  width={96}
                 />
 
                 <button
-                  type="button"
-                  onClick={() => onPreviewRemove && onPreviewRemove(index)}
                   className="absolute top-1 right-1 hidden rounded-full bg-white p-1 shadow-md transition group-hover:block hover:bg-red-500 hover:text-white"
+                  onClick={() => onPreviewRemove && onPreviewRemove(index)}
+                  type="button"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -59,20 +59,20 @@ export const UploadImg = ({ name, label, files, onFilesChange, onPreviewRemove, 
 
           {/* novas imagens */}
           {files.map((file, index) => (
-            <div key={`file-${index}`} className="group relative h-24 w-24">
+            <div className="group relative h-24 w-24" key={`file-${index}`}>
               <Image
-                src={URL.createObjectURL(file)}
                 alt="Preview"
-                width={96}
-                height={96}
                 className="h-full w-full rounded-lg object-cover"
-                unoptimized
+                height={96}
+                src={URL.createObjectURL(file)}
                 style={{ objectFit: "cover" }}
+                unoptimized
+                width={96}
               />
               <button
-                type="button"
-                onClick={() => removeFile(index)}
                 className="absolute top-1 right-1 hidden rounded-full bg-white p-1 shadow-md transition group-hover:block hover:bg-red-500 hover:text-white"
+                onClick={() => removeFile(index)}
+                type="button"
               >
                 <Trash2 size={16} />
               </button>
@@ -80,12 +80,12 @@ export const UploadImg = ({ name, label, files, onFilesChange, onPreviewRemove, 
           ))}
 
           <label
-            htmlFor={name}
             className="hover:border-primary flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed text-sm text-gray-500"
+            htmlFor={name}
           >
             <UploadCloud className="mb-1 h-6 w-6" />
             <span className="text-center text-xs">Adicionar imagens</span>
-            <input accept="image/*" id={name} type="file" multiple onChange={handleImageUpload} className="hidden" />
+            <input accept="image/*" className="hidden" id={name} multiple onChange={handleImageUpload} type="file" />
           </label>
         </CardContent>
       </Card>
