@@ -5,47 +5,64 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
+import { ProductCategory } from "@/entities/Product";
+import { useProduct } from "@/hooks/useProduct";
+import { formatMoney } from "@/lib/utils";
+import ProductService from "@/services/ProductService";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import { CircleChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-const newProductSchema = z.object({
-  id: z.string(),
-  name: z.string().min(1, "Nome do produto é obrigatório"),
-  description: z.string().max(500, "Descrição muito longa").optional(),
-  price: z.string().min(1, "Valor é obrigatório"),
-  quantity: z.coerce.number().min(1, "Quantidade é obrigatória"),
-  category: z.string().min(1, "Categoria é obrigatório"),
-});
-
-type NewProductType = z.infer<typeof newProductSchema>;
+import toast from "react-hot-toast";
+import { newProductSchema, NewProductType } from "../new/page";
 
 export default function Page() {
   const { back } = useRouter();
   const params = useParams();
-  const productId = params.productId;
-  const isEditing = productId !== "new";
+  const productId = (params.productId || "") as string;
+  const { product } = useProduct(productId);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<NewProductType>({ resolver: zodResolver(newProductSchema) });
 
-  const onSubmit = (data: NewProductType) => {
+  useEffect(() => {
+    if (product) {
+      reset({
+        ...product,
+        price: formatMoney(product.price) as unknown as number
+      });
+    }
+  }, [product, reset]);
+
+  const onSubmit = async (data: NewProductType) => {
     console.log(data);
+    try {
+      await ProductService.updateProduct(productId, data);
+      toast.success("Produto atualizado com sucesso!");
+      back();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(
+        error.message ||
+          "Erro ao atualizar o produto. Tente novamente mais tarde",
+      );
+    }
   };
 
   return (
     <div className="mx-auto max-w-6xl p-6">
-      <span className="mb-6 flex items-center gap-2 cursor-pointer" onClick={() => back()}>
+      <span
+        className="mb-6 flex cursor-pointer items-center gap-2"
+        onClick={() => back()}
+      >
         <CircleChevronLeft />
-        <h1 className="text-2xl font-bold">
-          {isEditing ? "Editar Produto" : "Novo Produto"}
-        </h1>
+        <h1 className="text-2xl font-bold">Editar Produto</h1>
       </span>
 
       <form
@@ -53,15 +70,13 @@ export default function Page() {
         className="grid grid-cols-1 gap-8 lg:grid-cols-2"
       >
         <div className="flex flex-col gap-4">
-          {isEditing && (
-            <Input
-              value={productId}
-              label="#"
-              error={errors.id?.message}
-              disabled
-              {...register("id")}
-            />
-          )}
+          <Input
+            value={productId}
+            label="#"
+            error={errors.id?.message}
+            disabled
+            {...register("id")}
+          />
 
           <Input
             label="Nome do produto"
@@ -83,6 +98,7 @@ export default function Page() {
               label="Valor"
               placeholder="R$ 450,00"
               error={errors.price?.message}
+              mask={formatMoney}
               {...register("price")}
             />
 
@@ -90,8 +106,8 @@ export default function Page() {
               label="Quantidade"
               placeholder="30"
               type="number"
-              error={errors.quantity?.message}
-              {...register("quantity")}
+              error={errors.qtd?.message}
+              {...register("qtd")}
             />
           </div>
 
@@ -100,10 +116,11 @@ export default function Page() {
             label="Categoria"
             placeholder="Headphone, Keyboard"
             error={errors.category?.message}
-            onChange={(v) => setValue("category", v)}
+            onChange={(v) => setValue("category", v as ProductCategory)}
+            defaultValue={product?.category}
             options={[
-              { label: "headphone", value: "headphone" },
-              { label: "keyboard", value: "keyboard" },
+              { label: "headphone", value: "HEADPHONE" },
+              { label: "keyboard", value: "KEYBOARD" },
             ]}
           />
         </div>
@@ -120,7 +137,7 @@ export default function Page() {
             Cancelar
           </Button>
           <Button type="submit" size="sm" className="rounded-full">
-            Criar produto
+            Atualizar produto
           </Button>
         </div>
       </form>

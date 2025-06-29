@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export const useOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [params, setParams] = useState<GetOrdersParams>({});
+  const [params, setParams] = useState<GetOrdersParams>({ limit: 999 });
 
   useEffect(() => {
     const fetchOrders = async () => {
