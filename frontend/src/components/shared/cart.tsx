@@ -16,7 +16,7 @@ const Cart = () => {
   return (
     <Drawer direction="right">
       <DrawerTrigger>
-        <div className="flex rounded-lg bg-black p-2 text-slate-100 items-center gap-x-2">
+        <div className="flex items-center gap-x-2 rounded-lg bg-black p-2 text-slate-100">
           <ShoppingCart size={16} />
           <span>Cart</span>
         </div>
@@ -52,10 +52,8 @@ const Cart = () => {
         <DrawerFooter>
           <div className="flex justify-end gap-x-2">
             <Button>Go to checkout</Button>
-            <DrawerClose>
-              <Button variant="outline">
-                <X />
-              </Button>
+            <DrawerClose className="bg-black text-white rounded-sm self-center">
+              <X />
             </DrawerClose>
           </div>
         </DrawerFooter>
