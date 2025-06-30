@@ -1,2 +1,2 @@
-export * from './interface/ICryptographyProvider';
-export * from './cryptography.module';
+export * from "./cryptography.module";
+export * from "./interface/ICryptographyProvider";

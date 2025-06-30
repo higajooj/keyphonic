@@ -1,11 +1,7 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
-import { OrderDomain, IOrder } from '../order.domain';
-import { IOrderRepository } from '../interfaces/order.interface';
-import { PaymentMethodEnum } from 'generated/prisma';
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { PaymentMethodEnum } from "generated/prisma";
+import { IOrderRepository } from "../interfaces/order.interface";
+import { IOrder, OrderDomain } from "../order.domain";
 
 export type UpdateOrderServiceInput = {
   id: string;
@@ -20,10 +16,7 @@ export type UpdateOrderServiceOutput = IOrder;
 export class UpdateOrderService {
   constructor(private readonly orderRepository: IOrderRepository) {}
 
-  public async execute({
-    id,
-    ...input
-  }: UpdateOrderServiceInput): Promise<UpdateOrderServiceOutput> {
+  public async execute({ id, ...input }: UpdateOrderServiceInput): Promise<UpdateOrderServiceOutput> {
     const order = await this.orderRepository.findByUnique({ id });
 
     if (!order) {
@@ -39,9 +32,7 @@ export class UpdateOrderService {
     const updatedOrder = await this.orderRepository.update({ id }, domain);
 
     if (!updatedOrder) {
-      throw new InternalServerErrorException(
-        `Não foi possível atualizar o pedido com id: ${id}`,
-      );
+      throw new InternalServerErrorException(`Não foi possível atualizar o pedido com id: ${id}`);
     }
 
     return updatedOrder;

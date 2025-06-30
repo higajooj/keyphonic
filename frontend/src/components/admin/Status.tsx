@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import { AlertOctagon, CircleAlert, CircleCheck, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export enum StatusEnum {
   PENDING = "PENDING",
@@ -59,9 +59,7 @@ export default function Status({ status, onlyIcon = false }: StatusProps) {
         )}
       >
         {icon}
-        {!onlyIcon && (
-          <p className="text-center text-[10px] font-semibold">{label}</p>
-        )}
+        {!onlyIcon && <p className="text-center text-[10px] font-semibold">{label}</p>}
       </div>
     </div>
   );

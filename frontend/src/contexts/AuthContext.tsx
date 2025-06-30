@@ -1,9 +1,9 @@
 "use client";
 
-import { localStorageKeys } from "@/config/localStorageKeys";
-import AuthService from "@/services/AuthService";
 import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { localStorageKeys } from "@/config/localStorageKeys";
+import AuthService from "@/services/AuthService";
 
 interface LoginInput {
   email: string;
@@ -85,10 +85,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, login, logout, signUp, user }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, signUp, user }}>{children}</AuthContext.Provider>
   );
 };

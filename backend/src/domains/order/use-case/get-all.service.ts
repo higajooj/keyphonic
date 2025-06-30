@@ -1,12 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { PaymentMethodEnum } from 'generated/prisma';
-import { IOrderRepository } from '../interfaces/order.interface';
-import {
-  BasePaginationInputDTO,
-  BasePaginationOutputDTO,
-} from 'src/shared/dto/pagination.dto';
-import { IOrder } from '../order.domain';
-import { makePagination } from 'src/shared/utils/make-pagination';
+import { Injectable } from "@nestjs/common";
+import { PaymentMethodEnum } from "generated/prisma";
+import { BasePaginationInputDTO, BasePaginationOutputDTO } from "src/shared/dto/pagination.dto";
+import { makePagination } from "src/shared/utils/make-pagination";
+import { IOrderRepository } from "../interfaces/order.interface";
+import { IOrder } from "../order.domain";
 
 export class GetAllOrderServiceInput extends BasePaginationInputDTO {
   filter?: {
@@ -23,10 +20,7 @@ export class GetAllOrderServiceOutput extends BasePaginationOutputDTO {
 export class GetAllOrderService {
   constructor(private readonly orderRepository: IOrderRepository) {}
 
-  public async execute({
-    filter,
-    pagination,
-  }: GetAllOrderServiceInput): Promise<GetAllOrderServiceOutput> {
+  public async execute({ filter, pagination }: GetAllOrderServiceInput): Promise<GetAllOrderServiceOutput> {
     const where: any = {};
 
     if (filter?.paymentMethod) {
@@ -34,7 +28,7 @@ export class GetAllOrderService {
     }
 
     if (filter?.search) {
-      const match = { contains: filter.search, mode: 'insensitive' };
+      const match = { contains: filter.search, mode: "insensitive" };
       where.OR = [
         { address: { city: match } },
         { address: { neighborhood: match } },

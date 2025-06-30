@@ -2,12 +2,7 @@
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 const formatYAxisLabel = (value: number | string) => {
   const num = typeof value === "string" ? parseFloat(value) : value;
@@ -44,12 +39,7 @@ export function OrdersChart({ chartConfig, chartData }: OrdersChartProps) {
           tickMargin={10}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <Bar
-          activeBar={{ fill: "var(--color-value)" }}
-          dataKey="value"
-          fill={"#008fcc90"}
-          radius={8}
-        />
+        <Bar activeBar={{ fill: "var(--color-value)" }} dataKey="value" fill={"#008fcc90"} radius={8} />
       </BarChart>
     </ChartContainer>
   );

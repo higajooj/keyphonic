@@ -1,8 +1,8 @@
-import { IUserRepository } from '../interfaces/user.interface';
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { EnvironmentVariables, EnvironmentVariablesType } from 'src/config/env';
 import { ICryptographyProvider } from 'src/shared/providers/cryptography';
 import { ITokenProvider } from 'src/shared/providers/token';
+import { IUserRepository } from '../interfaces/user.interface';
 
 export type LoginServiceInput = {
   password: string;

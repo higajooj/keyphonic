@@ -1,11 +1,5 @@
-import {
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsPositive,
-  IsString,
-} from 'class-validator';
-import { CategoryEnum } from 'generated/prisma';
+import { IsEnum, IsNumber, IsOptional, IsPositive, IsString } from "class-validator";
+import { CategoryEnum } from "generated/prisma";
 
 export class UpdateProductBody {
   @IsString()

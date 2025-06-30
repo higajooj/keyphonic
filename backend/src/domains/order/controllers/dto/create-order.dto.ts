@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Type } from "class-transformer";
 import {
   ArrayMinSize,
   IsArray,
@@ -8,8 +8,8 @@ import {
   IsOptional,
   IsString,
   ValidateNested,
-} from 'class-validator';
-import { PaymentMethodEnum } from 'generated/prisma';
+} from "class-validator";
+import { PaymentMethodEnum } from "generated/prisma";
 
 class Items {
   @IsString()

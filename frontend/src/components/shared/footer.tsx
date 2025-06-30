@@ -10,9 +10,7 @@ const Footer = () => {
           <h1 className="font-bold text-4xl">KeyPhonic</h1>
 
           <div className="flex flex-col gap-y-2">
-            <h3 className="border-gray-900 border-b font-semibold">
-              Contact Us
-            </h3>
+            <h3 className="border-gray-900 border-b font-semibold">Contact Us</h3>
 
             <div className="flex flex-col gap-y-6">
               <div className="flex gap-x-2">
@@ -36,9 +34,7 @@ const Footer = () => {
 
         <div className="flex gap-x-12">
           <div className="flex flex-col gap-y-4">
-            <h3 className="border-slate-100 border-b font-semibold text-xl">
-              Most popular categories
-            </h3>
+            <h3 className="border-slate-100 border-b font-semibold text-xl">Most popular categories</h3>
 
             <ul className="ml-4 list-disc space-y-2">
               <li>
@@ -66,9 +62,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-y-4">
-            <h3 className="border-slate-100 border-b font-semibold text-xl">
-              Customer Services
-            </h3>
+            <h3 className="border-slate-100 border-b font-semibold text-xl">Customer Services</h3>
 
             <ul className="ml-4 list-disc space-y-2">
               <li>

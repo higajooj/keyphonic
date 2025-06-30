@@ -1,22 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { AggregateBaseArgs, IPrismaRepository } from './IRepository';
-import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "src/shared/infra/prisma/prisma.service";
+import { AggregateBaseArgs, IPrismaRepository } from "./IRepository";
 
 @Injectable()
-export abstract class PrismaRepository<
-  FindFirstArgsBase,
-  WhereUniqueInput,
-  CreateInput,
-  UpdateInput,
-  Model,
-> implements
-    IPrismaRepository<
-      FindFirstArgsBase,
-      WhereUniqueInput,
-      CreateInput,
-      UpdateInput,
-      Model
-    >
+export abstract class PrismaRepository<FindFirstArgsBase, WhereUniqueInput, CreateInput, UpdateInput, Model>
+  implements IPrismaRepository<FindFirstArgsBase, WhereUniqueInput, CreateInput, UpdateInput, Model>
 {
   private table: string;
   private prisma: PrismaService;
@@ -34,10 +22,7 @@ export abstract class PrismaRepository<
   async create(data: CreateInput): Promise<Model> {
     return await this.prisma[this.table].create({ data });
   }
-  async update(
-    unique: WhereUniqueInput,
-    data: Omit<UpdateInput, 'order'>,
-  ): Promise<void | Model> {
+  async update(unique: WhereUniqueInput, data: Omit<UpdateInput, "order">): Promise<void | Model> {
     return await this.prisma[this.table].update({ where: unique, data });
   }
   async delete(unique: WhereUniqueInput): Promise<void> {

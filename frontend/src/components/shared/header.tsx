@@ -4,6 +4,7 @@ import { CircleUser, MapPin } from "lucide-react";
 import Link from "next/link";
 import Container from "../keyphonic/container";
 import { Input } from "../ui/input";
+import Cart from "./cart";
 
 const Header = () => {
   return (
@@ -25,10 +26,14 @@ const Header = () => {
             <Input name="search" variant="search" />
           </div>
 
-          <Link className="flex items-center gap-x-2" href="/login">
-            <CircleUser size={16} />
-            <span>Sign in</span>
-          </Link>
+          <div className="flex gap-x-2">
+            <Cart />
+
+            <Link className="flex items-center gap-x-2" href="/login">
+              <CircleUser size={16} />
+              <span>Sign in</span>
+            </Link>
+          </div>
         </div>
       </Container>
     </>

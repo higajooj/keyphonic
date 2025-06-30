@@ -1,8 +1,6 @@
-import { BadRequestException } from '@nestjs/common';
-import { CategoryEnum, ProductStatusEnum, } from 'generated/prisma';
-import BaseDomain, {
-  BaseDomainInterface,
-} from 'src/shared/domain/base-domain.domain';
+import { BadRequestException } from "@nestjs/common";
+import { CategoryEnum, ProductStatusEnum } from "generated/prisma";
+import BaseDomain, { BaseDomainInterface } from "src/shared/domain/base-domain.domain";
 
 export type IProduct = {
   id: string;
@@ -27,12 +25,7 @@ type CreateProductInput = {
   isActive?: boolean;
 } & BaseDomainInterface;
 
-type UpdateProductInput = Partial<
-  Pick<
-    CreateProductInput,
-    'name' | 'description' | 'price' | 'qtd' | 'category'
-  >
->;
+type UpdateProductInput = Partial<Pick<CreateProductInput, "name" | "description" | "price" | "qtd" | "category">>;
 export class ProductDomain extends BaseDomain {
   name: string;
   description: string;
@@ -79,9 +72,7 @@ export class ProductDomain extends BaseDomain {
     const newQtd = this.qtd - quantity;
 
     if (newQtd < 0) {
-      throw new BadRequestException(
-        `Estoque insuficiente para o produto "${this.name}"`,
-      );
+      throw new BadRequestException(`Estoque insuficiente para o produto "${this.name}"`);
     }
 
     this.qtd = newQtd;
@@ -101,15 +92,13 @@ export class ProductDomain extends BaseDomain {
   private _validate(input: CreateProductInput) {
     if (input.id) return;
     if (!input.description || !input.name || !input.category || !input.price)
-      throw new BadRequestException(
-        'name, decription, category and price are required fields',
-      );
+      throw new BadRequestException("name, decription, category and price are required fields");
   }
 
   private _sanitize(input: CreateProductInput) {
     return {
-      name: input.name.trim().replace(/\s+/g, ' '),
-      description: input.description.trim().replace(/\s+/g, ' '),
+      name: input.name.trim().replace(/\s+/g, " "),
+      description: input.description.trim().replace(/\s+/g, " "),
       price: input.price,
       qtd: input.qtd || 0,
       category: input.category,

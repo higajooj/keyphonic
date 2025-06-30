@@ -1,14 +1,10 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { OrderDomain, IOrder } from '../order.domain';
-import { IOrderRepository } from '../interfaces/order.interface';
-import { PaymentMethodEnum } from 'generated/prisma';
-import { IProductRepository } from 'src/domains/product/interfaces/product.interface';
-import { IProduct, ProductDomain } from 'src/domains/product/product.domain';
-import { IOrderItemRepository } from 'src/domains/order-item/interfaces/order-item.interface';
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { PaymentMethodEnum } from "generated/prisma";
+import { IOrderItemRepository } from "src/domains/order-item/interfaces/order-item.interface";
+import { IProductRepository } from "src/domains/product/interfaces/product.interface";
+import { IProduct, ProductDomain } from "src/domains/product/product.domain";
+import { IOrderRepository } from "../interfaces/order.interface";
+import { IOrder, OrderDomain } from "../order.domain";
 
 export type ItemsInput = { productId: string; quantity: number };
 
@@ -29,12 +25,9 @@ export class CreateService {
     private readonly productsRepository: IProductRepository,
   ) {}
 
-  public async execute({
-    items,
-    ...input
-  }: CreateServiceInput): Promise<CreateServiceOutput> {
+  public async execute({ items, ...input }: CreateServiceInput): Promise<CreateServiceOutput> {
     if (!items || items.length === 0) {
-      throw new BadRequestException('Items are required to create an order');
+      throw new BadRequestException("Items are required to create an order");
     }
     const products = await this.loadProducts(items.map((i) => i.productId));
 
@@ -60,17 +53,13 @@ export class CreateService {
     });
 
     if (products.length !== productIds.length) {
-      throw new NotFoundException('One or more products not found');
+      throw new NotFoundException("One or more products not found");
     }
 
     return products;
   }
 
-  private async createOrderItems(
-    orderId: string,
-    products: IProduct[],
-    items: ItemsInput[],
-  ): Promise<void> {
+  private async createOrderItems(orderId: string, products: IProduct[], items: ItemsInput[]): Promise<void> {
     const orderItems = items.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       if (!product) {
@@ -88,16 +77,11 @@ export class CreateService {
     await this.orderItemRepository.createMany(orderItems);
   }
 
-  private async updateProductsStock(
-    products: IProduct[],
-    items: ItemsInput[],
-  ): Promise<void> {
+  private async updateProductsStock(products: IProduct[], items: ItemsInput[]): Promise<void> {
     const updates = items.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       if (!product) {
-        throw new BadRequestException(
-          `Produto ${item.productId} não encontrado`,
-        );
+        throw new BadRequestException(`Produto ${item.productId} não encontrado`);
       }
 
       const domain = new ProductDomain(product);

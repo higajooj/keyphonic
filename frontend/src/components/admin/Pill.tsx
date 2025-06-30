@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import { ClassNameValue } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 interface PillProps {
   children: ReactNode;
@@ -9,10 +9,7 @@ interface PillProps {
 export const Pill = ({ children, className }: PillProps) => {
   return (
     <span
-      className={cn(
-        "bg-brand-500/10 text-brand-500 h-fit w-fit rounded-full px-2.5 py-1.5 font-semibold",
-        className,
-      )}
+      className={cn("bg-brand-500/10 text-brand-500 h-fit w-fit rounded-full px-2.5 py-1.5 font-semibold", className)}
     >
       {children}
     </span>

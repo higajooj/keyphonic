@@ -1,10 +1,9 @@
-import { localStorageKeys } from "@/config/localStorageKeys";
 import axios from "axios";
+import { localStorageKeys } from "@/config/localStorageKeys";
 
 export const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
-
 
 httpClient.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
