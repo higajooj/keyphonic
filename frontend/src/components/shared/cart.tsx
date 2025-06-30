@@ -3,6 +3,7 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -102,7 +103,9 @@ const Cart = () => {
 
         <DrawerFooter>
           <div className="flex justify-end gap-x-2">
-            <Button>Go to checkout</Button>
+            <Link className="rounded-md bg-black p-1 text-white" href="/checkout">
+              Go to checkout
+            </Link>
             <DrawerClose className="self-center rounded-sm bg-black text-white">
               <X />
             </DrawerClose>

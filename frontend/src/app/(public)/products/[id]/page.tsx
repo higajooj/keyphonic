@@ -7,6 +7,7 @@ import { MouseEventHandler, useEffect } from "react";
 import ProductImagesCarousel from "@/components/products/product-images-carousel";
 import { Button } from "@/components/ui/button";
 import { useProduct } from "@/hooks/useProduct";
+import toast from "react-hot-toast";
 
 const ProductPage = () => {
   const params = useParams();
@@ -21,6 +22,7 @@ const ProductPage = () => {
   const addToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setCart((prev) => ({ ...prev, [productId]: 1 }));
+    toast.success("Produto adicionado ao carrinho!");
     console.log("added");
   };
 
