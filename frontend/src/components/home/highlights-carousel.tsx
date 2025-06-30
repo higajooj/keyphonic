@@ -16,7 +16,7 @@ const HighlightsCarousel = () => {
             </div>
 
             <div className="flex">
-              <span>image...</span>
+
             </div>
           </div>
         </CarouselItem>
