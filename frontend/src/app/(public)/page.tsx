@@ -21,15 +21,15 @@ const Home = () => {
             <h3 className="my-2 w-full self-start border-b text-xl">
               Grab the best deal on <strong>Keyboards</strong>
             </h3>
-            <CaterogyCarousel />
+            <CaterogyCarousel category="KEYBOARD" />
           </div>
 
           <div className="flex flex-col">
             <h3 className="my-2 w-full self-start border-b text-xl">
-              Grab the best deal on <strong>DACs</strong>
+              Grab the best deal on <strong>Headphones</strong>
             </h3>
 
-            <CaterogyCarousel />
+            <CaterogyCarousel category="HEADPHONE" />
           </div>
         </div>
       </Container>
