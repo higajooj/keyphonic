@@ -1,66 +1,18 @@
 "use client";
 
-import * as React from "react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import Link from "next/link";
 
 const ProductCategories = () => {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="rounded-full bg-black px-4 py-2 text-slate-100">
-            Keyboards
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Switches</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>switches</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Keycaps</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="rounded-full bg-black px-4 py-2 text-slate-100">
-            Headphones
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>IEMs</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>DACs</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>AMPs</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <span>keyboards</span>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <div className="flex gap-x-2 font-semibold">
+      <Link className="rounded-full bg-black px-4 py-2 text-slate-100" href="products/new">
+        Keyboards
+      </Link>
+
+      <Link className="rounded-full bg-black px-4 py-2 text-slate-100" href="products/new">
+        Headphones
+      </Link>
+    </div>
   );
 };
 
