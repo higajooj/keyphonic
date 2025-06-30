@@ -28,6 +28,12 @@ const Cart = () => {
         ...prev,
         [productId]: newQty,
       }));
+    else
+      setCart((prev) => {
+        delete prev[productId];
+
+        return prev;
+      });
   };
 
   return (
@@ -51,9 +57,9 @@ const Cart = () => {
                 <Image
                   alt="Keyboard image"
                   className="w-32 rounded-lg border border-black"
+                  height={100}
                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${product?.galery?.[0]}`}
                   width={100}
-                  height={100}
                 />
 
                 <div className="flex flex-col">
