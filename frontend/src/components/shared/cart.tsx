@@ -16,26 +16,26 @@ const Cart = () => {
   return (
     <Drawer direction="right">
       <DrawerTrigger>
-        <Button>
-          <ShoppingCart />
+        <div className="flex rounded-lg bg-black p-2 text-slate-100 items-center gap-x-2">
+          <ShoppingCart size={16} />
           <span>Cart</span>
-        </Button>
+        </div>
       </DrawerTrigger>
 
       <DrawerContent className="w-[1200px]">
         <DrawerHeader>
           <DrawerTitle>Cart</DrawerTitle>
 
-          <div className="flex border rounded-mg p-2 gap-x-1">
-            <Image alt="Keyboard image" className="rounded-lg w-32 border border-black" src={productImage} />
+          <div className="flex gap-x-1 rounded-mg border p-2">
+            <Image alt="Keyboard image" className="w-32 rounded-lg border border-black" src={productImage} />
 
             <div className="flex flex-col">
-              <h3 className="text-sm font-semibold">Product name</h3>
+              <h3 className="font-semibold text-sm">Product name</h3>
 
               <span className="text-xs">color: red</span>
             </div>
 
-            <div className="flex flex-col justify-end items-center">
+            <div className="flex flex-col items-center justify-end">
               <span>$ 160.00</span>
 
               <div className="flex items-baseline">
