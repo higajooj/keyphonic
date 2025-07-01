@@ -30,8 +30,8 @@ const CaterogyCarousel = ({ category }: { category: "HEADPHONE" | "KEYBOARD" }) 
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${product.galery[0]}`}
                 width={100}
               />
-              <span>Keychron Q3</span>
-              <span className="font-bold">$ 160.00</span>
+              <span>{product?.name}</span>
+              <span className="font-bold">$ {product?.price / 100}</span>
             </Link>
           </CarouselItem>
         ))}
